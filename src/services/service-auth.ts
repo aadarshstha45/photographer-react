@@ -4,28 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Api } from "./service-api";
 import { ApiClient } from "./service-axios";
-import { useMutate } from "./service-form-methods";
 import TokenService from "./service-token";
+import { useStoreInitData } from "@/store";
 
 export const authTokenKey = "authTokenKey";
 export const authTokenDetails = "authTokenDetails";
-
+export const Authorities = {
+  superadmin: "superadmin",
+  admin: "admin",
+};
 export interface ILogin {
   email: string;
   password: string;
 }
-
-export interface IRegister extends ILogin {
-  name: string;
-  role?: string;
-  phone: string;
-}
-
-const useRegister = () => {
-  return useMutate<IRegister>({
-    apiEndpoint: Api.Auth.register,
-  });
-};
 
 const initLogin = (data: ILogin) => {
   return ApiClient.post(Api.Auth.login, data);
@@ -117,10 +108,12 @@ const useAuthentication = () => {
   });
 };
 
-export {
-  checkAuthentication,
-  useAuthentication,
-  useLogin,
-  useLogout,
-  useRegister,
+const getRole = () => {
+  const { initData } = useStoreInitData();
+  return {
+    isAdmin: initData?.role.includes(Authorities.superadmin),
+    isUser: initData?.role.includes(Authorities.admin),
+  };
 };
+
+export { checkAuthentication, useAuthentication, useLogin, useLogout, getRole };

@@ -1,3 +1,4 @@
+import { Authorities } from "@/services/service-auth";
 import {
   AsteriskSimple,
   House,
@@ -10,11 +11,13 @@ export const sidebarItems = [
     title: "Dashboard",
     icon: House,
     to: "/",
+    accessor: [Authorities.superadmin, Authorities.admin],
   },
   {
     title: "Master",
     icon: AsteriskSimple,
     to: "/master",
+    accessor: [Authorities.superadmin, Authorities.admin],
     subItems: [
       {
         title: "Category",
@@ -32,5 +35,6 @@ export const sidebarItems = [
     title: "Users",
     icon: User,
     to: "/users",
+    accessor: [Authorities.superadmin],
   },
 ];

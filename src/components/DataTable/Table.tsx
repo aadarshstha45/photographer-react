@@ -122,15 +122,8 @@ const DataTable: React.FC<IDataTable> = ({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnFiltersChange: setColumnFilters,
     globalFilterFn: filterFunction,
-    onGlobalFilterChange: (value) => {
-      console.log("Aa", value);
-      filter?.setGlobalFilter(value);
-    },
+    onGlobalFilterChange: filter?.setGlobalFilter,
   });
-
-  useEffect(() => {
-    console.log({ filter });
-  }, [filter]);
 
   return (
     <Flex flexDir={"column"} gap={4}>

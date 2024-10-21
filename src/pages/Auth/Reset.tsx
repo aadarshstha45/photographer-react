@@ -1,24 +1,24 @@
 import { TextInput } from "@/components/Form";
 import useGetErrors from "@/components/hooks/useGetErrors";
-import { useForgotPassword } from "@/services/service-user";
+import { useResetPassword } from "@/services/service-user";
 import { Button, Center, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { boxProps } from "./boxProps";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const defaultValues = {
-    email: "",
+    password: "",
   };
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm({ defaultValues });
   const {
-    mutateAsync: forgotPassword,
+    mutateAsync: resetPassword,
     isError,
     error,
     isPending,
-  } = useForgotPassword();
+  } = useResetPassword();
 
   const [backendError, setBackendError] = useState<Record<string, string[]>>(
     {}
@@ -29,9 +29,9 @@ const ForgotPassword = () => {
   }, [isError, error]);
 
   const onSubmit = async (data: typeof defaultValues) => {
-    const response = await forgotPassword({ data });
+    const response = await resetPassword({ data });
     if (response.data.status) {
-      navigate("/reset-password");
+      navigate("/login");
     }
   };
 
@@ -44,13 +44,13 @@ const ForgotPassword = () => {
         flexDirection="column"
       >
         <TextInput
-          label={"Email"}
+          label={"Password"}
           isRequired
-          placeholder={"Enter your email"}
+          placeholder={"Enter New Password"}
           control={control}
-          name={"email"}
-          type={"email"}
-          backendError={backendError.email}
+          name={"password"}
+          type={"password"}
+          backendError={backendError.password}
         />
         <Button type={"submit"} isLoading={isPending}>
           Submit
@@ -60,4 +60,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

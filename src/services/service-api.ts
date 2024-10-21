@@ -3,6 +3,7 @@ export const Api = {
     login: "/login",
     me: "/user",
     forgot: "/forgot-password",
+    reset: "/reset-password",
   },
   User: {
     create: "/register",

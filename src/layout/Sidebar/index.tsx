@@ -12,12 +12,15 @@ import { sidebarItems } from "../data";
 import Footer from "./Footer";
 import Header from "./Header";
 import SidebarItem from "./SidebarItem";
+import { Authorities, getRole } from "@/services/service-auth";
 interface ISidebarProps {
   width: ResponsiveValue<number | string>;
 }
 
 const Sidebar: FC<ISidebarProps> = ({ width }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { isAdmin } = getRole();
+  const userRole = isAdmin ? Authorities.superadmin : Authorities.admin;
 
   const bg = useColorModeValue("gray.50", "#1A1A1A");
 
@@ -40,17 +43,19 @@ const Sidebar: FC<ISidebarProps> = ({ width }) => {
       </CardHeader>
       <CardBody overflowY={"auto"}>
         <Stack gap={4}>
-          {sidebarItems.map((item, index) => (
-            <SidebarItem
-              key={index}
-              item={item}
-              subItems={item.subItems}
-              width={"250px"}
-              isOpen={openIndex === index}
-              onToggle={() => handleToggle(index)}
-              onClose={() => {}}
-            />
-          ))}
+          {sidebarItems
+            .filter((item) => item.accessor?.includes(userRole))
+            .map((item, index) => (
+              <SidebarItem
+                key={index}
+                item={item}
+                subItems={item.subItems}
+                width={"250px"}
+                isOpen={openIndex === index}
+                onToggle={() => handleToggle(index)}
+                onClose={() => {}}
+              />
+            ))}
         </Stack>
       </CardBody>
       <CardFooter>

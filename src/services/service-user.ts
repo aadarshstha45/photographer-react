@@ -8,6 +8,14 @@ interface IUserData {
   is_active: string;
 }
 
+interface IForgotPassword {
+  email: string;
+}
+
+interface IResetPassword {
+  password: string;
+}
+
 const useFetchUsers = () => {
   return useFetch<RootResponse<UserResponse>>({
     apiEndpoint: Api.User.getList,
@@ -24,4 +32,20 @@ const useAddUser = () => {
   });
 };
 
-export { useFetchUsers, useAddUser };
+const useForgotPassword = () => {
+  return useMutate<IForgotPassword>({
+    apiEndpoint: Api.Auth.forgot,
+    queryKey: ["forgotPassword"],
+    message: "Password reset link sent to your email.",
+  });
+};
+
+const useResetPassword = () => {
+  return useMutate<IResetPassword>({
+    apiEndpoint: Api.Auth.reset,
+    queryKey: ["resetPassword"],
+    message: "Password reset successfully.",
+  });
+};
+
+export { useFetchUsers, useAddUser, useForgotPassword, useResetPassword };

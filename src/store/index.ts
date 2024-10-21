@@ -3,6 +3,8 @@ import { create } from "zustand";
 interface IInitData {
   name?: string;
   email?: string;
+  role: string;
+  is_active: number;
 }
 
 interface IInitDataStore {
