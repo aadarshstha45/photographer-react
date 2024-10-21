@@ -49,7 +49,7 @@ const SingleFilePreview: React.FC<SingleFilePreviewProps> = ({
         alignSelf={"center"}
         aria-label="Delete Image"
         icon={<Icon as={Trash} boxSize={5} />}
-        borderRadius={5}
+        borderRadius={"sm"}
         colorScheme="red"
         size="sm"
         position="absolute"

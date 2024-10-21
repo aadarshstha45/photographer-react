@@ -99,8 +99,6 @@ function ReactDropzone({
     1;
   }, [file]);
 
-  console.log({ prevFiles });
-
   return (
     <Controller
       name={name}

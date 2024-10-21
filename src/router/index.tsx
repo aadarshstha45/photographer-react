@@ -34,6 +34,11 @@ const appRoutes = [
         accessor: [Authorities.admin, Authorities.superadmin],
       },
       {
+        path: "settings",
+        element: <ROUTES.Settings />,
+        accessor: [Authorities.superadmin],
+      },
+      {
         path: "*",
         element: (
           <Center h={"70dvh"} w={"full"}>

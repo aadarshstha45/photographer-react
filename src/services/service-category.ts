@@ -22,7 +22,7 @@ interface ICategoryData {
 const useAddCategory = () => {
   return useMutate<ICategoryData>({
     apiEndpoint: Api.Category.create,
-    invalidateEndpoints: ["category"],
+    invalidateEndpoints: ["categorys"],
     message: "Category added successfully",
   });
 };

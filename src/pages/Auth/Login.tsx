@@ -65,7 +65,7 @@ const Login = () => {
             Forgot password?
           </CLink>
         </Stack>
-        <Button type="submit" isLoading={isPending}>
+        <Button w={"full"} type="submit" isLoading={isPending}>
           Login
         </Button>
       </Flex>

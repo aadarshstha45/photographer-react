@@ -17,9 +17,8 @@ interface IPrevFiles {
 }
 
 interface FilePreview {
-  id?: string | number;
   url: string;
-  fileName?: string;
+  fileName: string;
 }
 
 interface MultipleFilePreviewsProps {
@@ -37,7 +36,7 @@ const flexProps = {
   flexShrink: 0,
   border: "1px solid",
   borderColor: "gray.200",
-  borderRadius: "md",
+  borderRadius: "sm",
   overflow: "hidden",
   bg: "rgba(241,242,244,0.40)",
   role: "files",
@@ -69,9 +68,10 @@ const buttonProps = {
   alignSelf: "center",
   "aria-label": "Delete Image",
   icon: <Icon as={Trash} boxSize={5} />,
-  borderRadius: 5,
+  borderRadius: "sm",
   colorScheme: "red",
   size: "sm",
+
   position: "absolute" as PositionProps["position"],
   top: 0,
   right: 0,
@@ -84,7 +84,6 @@ const MultipleFilePreviews: React.FC<MultipleFilePreviewsProps> = ({
   setDeleteImages,
   onDelete,
 }) => {
-  console.log({ prevFiles });
   return (
     <>
       {prevFiles &&
@@ -97,6 +96,7 @@ const MultipleFilePreviews: React.FC<MultipleFilePreviewsProps> = ({
               aspectRatio={1}
               src={file.url}
             />
+            <Text {...textProps}>{file.url.split("/").pop()!}</Text>
 
             <IconButton
               {...buttonProps}

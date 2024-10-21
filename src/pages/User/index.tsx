@@ -85,15 +85,18 @@ const Users = () => {
           },
         }}
         isLoading={isPending}
-        header={
-          <HStack spacing={4} bg={bg} p={4} borderRadius={5}>
-            <SearchInput w={"250px"} onSearch={setSearchText} />
-            <Button size={"lg"} onClick={openForm}>
-              Add User
-            </Button>
-          </HStack>
-        }
-      />
+      >
+        <HStack spacing={4} bg={bg} p={4} borderRadius={5}>
+          <SearchInput
+            placeholder="Search Users"
+            maxW={"250px"}
+            onSearch={setSearchText}
+          />
+          <Button size={"lg"} onClick={openForm}>
+            Add User
+          </Button>
+        </HStack>
+      </DataTable>
 
       {/* Form to add/edit user */}
       <UserForm isOpen={isFormOpen} onClose={closeForm} />

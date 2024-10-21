@@ -57,10 +57,6 @@ const CategoryForm = () => {
   );
 
   useEffect(() => {
-    console.log(deleteImages);
-  }, [deleteImages]);
-
-  useEffect(() => {
     isAddingError
       ? setBackendError(useGetErrors(addError))
       : isUpdatingError

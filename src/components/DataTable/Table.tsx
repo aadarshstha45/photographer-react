@@ -129,7 +129,7 @@ const DataTable: React.FC<IDataTable> = ({
     <Flex flexDir={"column"} gap={4}>
       <Card bg={bg}>
         {children && <CardHeader>{children}</CardHeader>}
-        <CardBody pt={0}>
+        <CardBody>
           <TableContainer transition={"all 0.3s"}>
             <Table transition={"all 0.3s"}>
               <Thead>
@@ -160,6 +160,7 @@ const DataTable: React.FC<IDataTable> = ({
                               fontWeight: 600,
                               color,
                             }}
+                            fontFamily={"Montserrat"}
                             cursor={
                               header.column.getCanSort() ? "pointer" : "default"
                             }

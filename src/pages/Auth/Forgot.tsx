@@ -1,11 +1,12 @@
 import { TextInput } from "@/components/Form";
 import useGetErrors from "@/hooks/useGetErrors";
 import { useForgotPassword } from "@/services/service-user";
-import { Button, Center, Flex } from "@chakra-ui/react";
+import { Center, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useBoxProps } from "./boxProps";
+import { Button } from "@/components/Button";
 
 const ForgotPassword = () => {
   const defaultValues = {
@@ -52,7 +53,7 @@ const ForgotPassword = () => {
           type={"email"}
           backendError={backendError.email}
         />
-        <Button type={"submit"} isLoading={isPending}>
+        <Button w={"full"} type={"submit"} isLoading={isPending}>
           Submit
         </Button>
       </Flex>

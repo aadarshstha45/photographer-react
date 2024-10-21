@@ -7,7 +7,7 @@ function setToken(token: TokenDetails) {
   try {
     const tokenWithExpiry = {
       token: token.token,
-      expiresIn: new Date().getTime() + 24 * 60 * 60 * 1000,
+      expiresIn: new Date().getTime() + 60 * 60 * 1000,
     };
     localStorage.setItem("token", JSON.stringify(tokenWithExpiry));
   } catch (e) {

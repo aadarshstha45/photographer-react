@@ -14,6 +14,8 @@ const solid = defineStyle((props) => {
       ? "#212121"
       : `${props.colorScheme}.500`,
     color: isSchemeWhite ? "#000000" : isSchemeBlack ? "#FFFFFF" : "white", // Dark gray text for white scheme, white text for black
+    width: "max-content",
+
     _hover: {
       bg: isSchemeWhite
         ? "#F2F2F2"
@@ -49,6 +51,7 @@ const outline = defineStyle((props) => {
       : `${props.colorScheme}.500`,
     fontWeight: 500,
     border: "2px solid",
+    width: "max-content",
     color: isSchemeWhite
       ? "#FFFFFF"
       : isSchemeBlack

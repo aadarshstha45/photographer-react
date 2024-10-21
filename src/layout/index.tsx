@@ -25,7 +25,7 @@ const LayoutWrapper = () => {
       >
         <Container
           pl={{
-            md: `calc(${width} + 10px)`,
+            md: `calc(${width} + 20px)`,
             xl: `calc(${width} + 50px)`,
           }}
           pr={{ xl: 20 }}

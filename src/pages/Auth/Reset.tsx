@@ -72,7 +72,7 @@ const ResetPassword = () => {
           type={"password"}
           backendError={backendError.password_confirmation}
         />
-        <Button type={"submit"} isLoading={isPending}>
+        <Button w={"full"} type={"submit"} isLoading={isPending}>
           Submit
         </Button>
       </Flex>

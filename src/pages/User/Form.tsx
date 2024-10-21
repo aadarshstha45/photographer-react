@@ -1,6 +1,8 @@
 import { StatusRadio, TextInput } from "@/components/Form";
 import ModalForm from "@/components/Form/Modal/ModalForm";
+import { useGetDirtyData } from "@/hooks";
 import useGetErrors from "@/hooks/useGetErrors";
+import { toFormData } from "@/services/service-axios";
 import { useAddUser } from "@/services/service-user";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -20,7 +22,9 @@ const UserForm: FC<IUserForm> = ({ isOpen, onClose, id }) => {
     is_active: "1",
   };
 
-  const { control, handleSubmit, reset } = useForm({ defaultValues });
+  const { control, handleSubmit, reset, formState } = useForm({
+    defaultValues,
+  });
 
   const {
     mutateAsync: addUser,
@@ -37,7 +41,10 @@ const UserForm: FC<IUserForm> = ({ isOpen, onClose, id }) => {
   }, [isError, error]);
 
   const onSubmit = async (data: typeof defaultValues) => {
-    await addUser({ data });
+    const formData = id
+      ? toFormData<typeof defaultValues>(useGetDirtyData(formState, data))
+      : toFormData<typeof defaultValues>(data);
+    await addUser({ data: formData });
     onClose();
     reset(defaultValues);
   };

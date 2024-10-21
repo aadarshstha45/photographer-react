@@ -3,7 +3,7 @@ import { useColorModeValue } from "@chakra-ui/react";
 export const useInputProps = () => {
   const borderColor = useColorModeValue("gray.600", "gray.300");
   const hoveredBorder = useColorModeValue("gray.500", "gray.400");
-  const focusBorderColor = useColorModeValue("gray.400", "white");
+  const focusBorderColor = useColorModeValue("#000", "#FFF");
   return {
     borderRadius: 5,
     borderColor,

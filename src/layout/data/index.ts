@@ -5,7 +5,7 @@ export const sidebarItems = [
   {
     title: "Dashboard",
     icon: House,
-    to: "",
+    to: "/",
     accessor: [Authorities.superadmin, Authorities.admin],
   },
   {
