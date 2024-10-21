@@ -4,7 +4,7 @@ import { useLogin } from "@/services/service-auth";
 import { Center, Flex, Link as CLink, Text, Stack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { boxProps } from "./boxProps";
+import { useBoxProps } from "./boxProps";
 import { useEffect } from "react";
 import { AxiosError } from "axios";
 
@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <Center h="100dvh" px={2}>
       <Flex
-        {...boxProps}
+        {...useBoxProps()}
         as={"form"}
         onSubmit={handleSubmit(onSubmit)}
         flexDirection="column"

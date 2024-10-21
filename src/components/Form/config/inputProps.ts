@@ -1,16 +1,17 @@
-import { useColorMode } from "@chakra-ui/react";
+import { useColorModeValue } from "@chakra-ui/react";
 
 export const useInputProps = () => {
-  const { colorMode } = useColorMode();
-
+  const borderColor = useColorModeValue("gray.600", "gray.300");
+  const hoveredBorder = useColorModeValue("gray.500", "gray.400");
+  const focusBorderColor = useColorModeValue("gray.400", "white");
   return {
     borderRadius: 5,
-    borderColor: colorMode === "dark" ? "gray.600" : "gray.300",
+    borderColor,
     size: "lg",
     _hover: {
-      borderColor: colorMode === "dark" ? "gray.500" : "gray.400",
+      borderColor: hoveredBorder,
     },
-    focusBorderColor: colorMode === "dark" ? "gray.400" : "gray.400",
+    focusBorderColor,
     errorBorderColor: "red.500",
     boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
   };

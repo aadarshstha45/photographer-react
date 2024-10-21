@@ -35,7 +35,7 @@ import Pagination from "./Pagination";
 interface IDataTable {
   data: Record<string, any>[];
   count?: number;
-  header?: ReactNode;
+  children?: ReactNode;
   columns: ColumnDef<any, any>[];
   isLoading?: boolean;
   pagination?: {
@@ -77,7 +77,7 @@ const DataTable: React.FC<IDataTable> = ({
   isLoading,
   pagination,
   filter,
-  header,
+  children,
 }) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -128,7 +128,7 @@ const DataTable: React.FC<IDataTable> = ({
   return (
     <Flex flexDir={"column"} gap={4}>
       <Card bg={bg}>
-        {header && <CardHeader>{header}</CardHeader>}
+        {children && <CardHeader>{children}</CardHeader>}
         <CardBody pt={0}>
           <TableContainer transition={"all 0.3s"}>
             <Table transition={"all 0.3s"}>

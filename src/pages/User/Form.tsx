@@ -1,6 +1,6 @@
 import { StatusRadio, TextInput } from "@/components/Form";
-import ModalForm from "@/components/Form/ModalForm";
-import useGetErrors from "@/components/hooks/useGetErrors";
+import ModalForm from "@/components/Form/Modal/ModalForm";
+import useGetErrors from "@/hooks/useGetErrors";
 import { useAddUser } from "@/services/service-user";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";

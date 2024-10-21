@@ -1,4 +1,4 @@
-import { Center, Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 import { ReactNode, Suspense, useEffect } from "react";
 import { Navigate, Outlet, Route, RouteObject, Routes } from "react-router-dom";
 import { appRoutes } from "./router";
@@ -10,6 +10,7 @@ import {
 } from "./services/service-auth";
 import { useFetchInitData } from "./services/service-init";
 import { ROUTES } from "./router/routes";
+import Loader from "./utils/Loader";
 
 // Define the shape of your route objects for better type safety
 type AppRoute = RouteObject & {
@@ -70,19 +71,7 @@ const App = () => {
   }
 
   return (
-    <Suspense
-      fallback={
-        <Center h={"100dvh"} w={"100dvw"}>
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            size={"xl"}
-            emptyColor="gray.200"
-            color="primary.500"
-          />
-        </Center>
-      }
-    >
+    <Suspense fallback={<Loader />}>
       <Routes>
         {isAuthenticated ? (
           <>

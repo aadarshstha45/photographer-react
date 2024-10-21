@@ -9,6 +9,10 @@ interface IPagination {
   prev_page_url: string;
 }
 
+export interface IStatus {
+  is_active: string;
+}
+
 export interface RootResponse<T> {
   message?: string;
   status?: boolean;
@@ -30,4 +34,17 @@ export interface UserResponse {
   name: string;
   email: string;
   is_active: boolean;
+}
+
+export interface CategoryResponse {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  is_active: number;
+  image: string;
+  images: {
+    id: number;
+    image: string;
+  }[];
 }

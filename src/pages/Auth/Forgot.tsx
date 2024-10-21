@@ -1,11 +1,11 @@
 import { TextInput } from "@/components/Form";
-import useGetErrors from "@/components/hooks/useGetErrors";
+import useGetErrors from "@/hooks/useGetErrors";
 import { useForgotPassword } from "@/services/service-user";
 import { Button, Center, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { boxProps } from "./boxProps";
+import { useBoxProps } from "./boxProps";
 
 const ForgotPassword = () => {
   const defaultValues = {
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
   return (
     <Center h={"100dvh"} w={"full"}>
       <Flex
-        {...boxProps}
+        {...useBoxProps()}
         as={"form"}
         onSubmit={handleSubmit(onSubmit)}
         flexDirection="column"
