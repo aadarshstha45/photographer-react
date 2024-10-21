@@ -4,12 +4,23 @@ import { useResetPassword } from "@/services/service-user";
 import { Button, Center, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { boxProps } from "./boxProps";
 
 const ResetPassword = () => {
+  // Use useLocation to get the current location object
+  const location = useLocation();
+
+  // Function to retrieve query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get("token");
+  const email = queryParams.get("email");
+  console.log({ token, email });
   const defaultValues = {
     password: "",
+    password_confirmation: "",
+    token,
+    email,
   };
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm({ defaultValues });
@@ -51,6 +62,15 @@ const ResetPassword = () => {
           name={"password"}
           type={"password"}
           backendError={backendError.password}
+        />
+        <TextInput
+          label={"Confirm Password"}
+          isRequired
+          placeholder={"Enter New Password Again"}
+          control={control}
+          name={"password_confirmation"}
+          type={"password"}
+          backendError={backendError.password_confirmation}
         />
         <Button type={"submit"} isLoading={isPending}>
           Submit

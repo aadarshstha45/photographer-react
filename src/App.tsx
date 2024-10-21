@@ -108,6 +108,10 @@ const App = () => {
               path={"/reset-password"}
               element={<ROUTES.ResetPassword />}
             />
+            <Route
+              path="/email-confirmation"
+              element={<ROUTES.EmailConfirmation />}
+            />
             <Route path="*" element={<MissingRoute />} />
           </Route>
         )}

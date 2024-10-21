@@ -31,7 +31,7 @@ const ForgotPassword = () => {
   const onSubmit = async (data: typeof defaultValues) => {
     const response = await forgotPassword({ data });
     if (response.data.status) {
-      navigate("/reset-password");
+      navigate("/email-confirmation");
     }
   };
 
