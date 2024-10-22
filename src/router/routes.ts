@@ -9,6 +9,7 @@ const EmailConfirmation = lazy(() => import("@/pages/Auth/EmailConfirmation"));
 const Category = lazy(() => import("@/pages/Category"));
 const CategoryForm = lazy(() => import("@/pages/Category/Form"));
 const Settings = lazy(() => import("@/pages/Settings"));
+const Messages = lazy(() => import("@/pages/Messages"));
 export const ROUTES = {
   Login,
   Dashboard,
@@ -19,4 +20,5 @@ export const ROUTES = {
   Category,
   CategoryForm,
   Settings,
+  Messages,
 };

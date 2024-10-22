@@ -33,6 +33,7 @@ interface ITextInputProps {
   width?: ResponsiveValue<number | string>;
   type?: string;
   helperText?: string;
+  variant?: string;
 }
 
 const TextInput: React.FC<ITextInputProps & InputProps & TextareaProps> = ({
@@ -52,6 +53,7 @@ const TextInput: React.FC<ITextInputProps & InputProps & TextareaProps> = ({
   type,
   backendError,
   helperText,
+  variant,
   ...restProps
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -81,6 +83,7 @@ const TextInput: React.FC<ITextInputProps & InputProps & TextareaProps> = ({
               maxRows={10}
               placeholder={placeholder ?? ""}
               value={value}
+              variant={isReadOnly ? "filled" : variant ?? "outline"}
               onChange={onChange}
               {...restProps}
             />
@@ -96,6 +99,7 @@ const TextInput: React.FC<ITextInputProps & InputProps & TextareaProps> = ({
                       : "password"
                     : type
                 }
+                variant={isReadOnly ? "filled" : variant ?? "outline"}
                 autoComplete={type === "password" ? "new-password" : "off"}
                 value={value}
                 placeholder={placeholder ?? ""}

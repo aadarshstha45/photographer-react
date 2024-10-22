@@ -39,6 +39,11 @@ const appRoutes = [
         accessor: [Authorities.superadmin],
       },
       {
+        path: "messages",
+        element: <ROUTES.Messages />,
+        accessor: [Authorities.admin, Authorities.superadmin],
+      },
+      {
         path: "*",
         element: (
           <Center h={"70dvh"} w={"full"}>

@@ -2,7 +2,13 @@ import { Button } from "@/components/Button";
 import { TextInput } from "@/components/Form";
 import { useGetDirtyData } from "@/hooks";
 import { toFormData } from "@/services/service-axios";
+import {
+  useGetPhotographer,
+  useUpdatePhotographer,
+} from "@/services/service-photographer";
+import Loader from "@/utils/Loader";
 import { Flex, GridItem, SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Settings = () => {
@@ -17,17 +23,47 @@ const Settings = () => {
     youtube: "",
   };
 
-  const { control, handleSubmit, formState } = useForm({
+  const [flag, setFlag] = useState<string>("view");
+
+  const { data: photographer, isPending: isLoading } = useGetPhotographer();
+
+  const { mutateAsync: updatePhotographer, isPending: isUpdating } =
+    useUpdatePhotographer();
+
+  const { control, handleSubmit, formState, reset } = useForm({
     defaultValues,
   });
 
+  useEffect(() => {
+    if (photographer?.data) {
+      reset({
+        name: photographer?.data?.name,
+        email: photographer?.data?.email,
+        address: photographer?.data?.address,
+        phone: photographer?.data?.phone,
+        description: photographer?.data?.description,
+        facebook: photographer?.data?.facebook,
+        instagram: photographer?.data?.instagram,
+        youtube: photographer?.data?.youtube,
+      });
+    }
+  }, [photographer?.data]);
+
   const onSubmit = async (data: typeof defaultValues) => {
-    console.log({ data });
     const formData = toFormData<typeof defaultValues>(
       useGetDirtyData(formState, data)
     );
-    console.log({ formData });
+    const response = await updatePhotographer({
+      data: formData,
+    });
+    if (response.data.status) {
+      setFlag("view");
+    }
   };
+
+  if (isLoading) {
+    return <Loader height={"70dvh"} width={"70dvw"} />;
+  }
 
   return (
     <Flex flexDir={"column"} gap={6}>
@@ -39,10 +75,17 @@ const Settings = () => {
         id="profile-form"
       >
         <GridItem colSpan={{ base: 2, md: 1 }}>
-          <TextInput control={control} name="name" label="Name" isRequired />
+          <TextInput
+            isReadOnly={flag === "view"}
+            control={control}
+            name="name"
+            label="Name"
+            isRequired
+          />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
           <TextInput
+            isReadOnly={flag === "view"}
             control={control}
             name="email"
             type="email"
@@ -51,10 +94,17 @@ const Settings = () => {
           />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
-          <TextInput control={control} name="phone" label="Phone" isRequired />
+          <TextInput
+            isReadOnly={flag === "view"}
+            control={control}
+            name="phone"
+            label="Phone"
+            isRequired
+          />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
           <TextInput
+            isReadOnly={flag === "view"}
             control={control}
             name="address"
             label="Address"
@@ -63,6 +113,7 @@ const Settings = () => {
         </GridItem>
         <GridItem colSpan={2}>
           <TextInput
+            isReadOnly={flag === "view"}
             control={control}
             name="description"
             label="Description"
@@ -71,18 +122,37 @@ const Settings = () => {
           />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
-          <TextInput control={control} name="facebook" label="Facebook" />
+          <TextInput
+            isReadOnly={flag === "view"}
+            control={control}
+            name="facebook"
+            label="Facebook"
+          />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
-          <TextInput control={control} name="instagram" label="Instagram" />
+          <TextInput
+            isReadOnly={flag === "view"}
+            control={control}
+            name="instagram"
+            label="Instagram"
+          />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
-          <TextInput control={control} name="youtube" label="Youtube" />
+          <TextInput
+            isReadOnly={flag === "view"}
+            control={control}
+            name="youtube"
+            label="Youtube"
+          />
         </GridItem>
       </SimpleGrid>
-      <Button type="submit" form="profile-form">
-        Save Changes
-      </Button>
+      {flag === "view" && <Button onClick={() => setFlag("edit")}>Edit</Button>}
+
+      {flag === "edit" && (
+        <Button isLoading={isUpdating} type="submit" form="profile-form">
+          Save Changes
+        </Button>
+      )}
     </Flex>
   );
 };

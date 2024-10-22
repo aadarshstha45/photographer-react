@@ -114,12 +114,18 @@ const CategoryForm = () => {
       <Text fontWeight={600} fontSize={"2xl"}>
         {id ? "Edit" : "Add"} Category
       </Text>
-      <Flex flexDir={"column"} as={"form"} onSubmit={handleSubmit(onSubmit)}>
+      <Flex
+        gap={4}
+        flexDir={"column"}
+        as={"form"}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextInput
           name={"name"}
           control={control}
           label={"Name"}
           backendError={backendError.name}
+          isRequired
         />
         <TextInput
           control={control}
@@ -139,6 +145,8 @@ const CategoryForm = () => {
           boxWidth={"250px"}
           boxHeight={"250px"}
           file={id ? category?.data?.image : ""}
+          isRequired
+          backendError={backendError.image}
         />
         <ReactDropzone
           isMultiple
@@ -155,6 +163,8 @@ const CategoryForm = () => {
           width={"100%"}
           boxWidth={"250px"}
           boxHeight={"250px"}
+          isRequired
+          backendError={backendError.images}
         />
         <StatusRadio control={control} />
 

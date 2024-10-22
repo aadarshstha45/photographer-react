@@ -160,7 +160,7 @@ const DataTable: React.FC<IDataTable> = ({
                               fontWeight: 600,
                               color,
                             }}
-                            fontFamily={"Montserrat"}
+                            fontFamily={"Inter Variable"}
                             cursor={
                               header.column.getCanSort() ? "pointer" : "default"
                             }

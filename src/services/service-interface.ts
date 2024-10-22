@@ -48,3 +48,15 @@ export interface CategoryResponse {
     image: string;
   }[];
 }
+
+export interface PhotographerResponse {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  description: string;
+  facebook: string;
+  instagram: string;
+  youtube: string;
+}

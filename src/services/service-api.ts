@@ -26,4 +26,8 @@ export const Api = {
     delete: "/category/:id",
     getList: "/category/get-list",
   },
+  Photographer: {
+    get: "/photographer/1",
+    update: "/photographer/1",
+  },
 };
