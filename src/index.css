@@ -1,0 +1,23 @@
+.slick-slide {
+  transition: transform 0.8s ease-in-out;
+  transform: scale(0.8);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.slick-center {
+  transform: scale(1);
+  border-bottom: 6px solid #c59d5f;
+}
+
+/* Ensure inactive slides have no border */
+.slick-slide:not(.slick-center) {
+  border-bottom: none;
+}
+
+.slick-center .overlay {
+  opacity: 0; /* Remove the dark overlay on the active slide */
+}
+
+.slick-slide:not(.slick-center) .overlay {
+  opacity: 0.7; /* Dark overlay applied to non-center slides */
+}
