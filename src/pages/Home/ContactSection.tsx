@@ -1,7 +1,8 @@
+import { Light } from "@/assets/icons";
 import { Button } from "@/components/Button";
 import TextInput from "@/components/Form/TextInput";
 import Header from "@/components/Header";
-import { GridItem, SimpleGrid } from "@chakra-ui/react";
+import { GridItem, Icon, SimpleGrid } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
 const inputProps = {
@@ -34,6 +35,9 @@ const ContactSection = () => {
       spacing={10}
       my={10}
       w={"100%"}
+      pos={"relative"}
+      py={20}
+      px={{ md: 10, lg: 20 }}
     >
       <GridItem colSpan={1} maxW={"569px"} px={4}>
         <Header
@@ -114,6 +118,15 @@ const ContactSection = () => {
           </GridItem>
         </SimpleGrid>
       </GridItem>
+      <Icon
+        as={Light}
+        w={"163px"}
+        h={"261px"}
+        color={"primary"}
+        pos={"absolute"}
+        bottom={0}
+        right={0}
+      />
     </SimpleGrid>
   );
 };

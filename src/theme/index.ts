@@ -17,27 +17,27 @@ export const theme = extendTheme({
     global: (props: StyleFunctionProps) => ({
       "html, body": {
         fontFamily: "Poppins",
-        bg: props.colorMode === "dark" ? "#181818" : ColorStyle.gray["50"], // Dynamic background color based on mode
+        bg: props.colorMode === "dark" ? "#181818" : ColorStyle.gray["100"], // Dynamic background color based on mode
         color: props.colorMode === "dark" ? "white" : "black", // Text color based on mode
         lineHeight: "normal",
       },
       /* Scrollbar styles */
       "::-webkit-scrollbar": {
-        width: "6px",
+        width: "8px",
         height: "6px",
       },
       "::-webkit-scrollbar-track": {
         backgroundColor:
           props.colorMode === "dark"
-            ? ColorStyle.gray["800"]
-            : ColorStyle.gray["100"],
+            ? ColorStyle.gray["600"]
+            : ColorStyle.gray["300"],
       },
       "::-webkit-scrollbar-thumb": {
         backgroundColor:
           props.colorMode === "dark"
-            ? ColorStyle.gray["100"]
-            : ColorStyle.primary["700"],
-        borderRadius: "6px",
+            ? ColorStyle.gray["200"]
+            : ColorStyle.gray["700"],
+        borderRadius: "2px",
       },
       "::-webkit-scrollbar-thumb:hover": {
         backgroundColor:

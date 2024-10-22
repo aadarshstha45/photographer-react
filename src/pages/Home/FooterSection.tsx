@@ -73,9 +73,19 @@ const FooterSection = () => {
         ))}
       </SimpleGrid>
       <HStack align={"center"} justify={"center"} spacing={4}>
-        <Icon as={FacebookLogo} boxSize={10} color={"primary"} weight="fill" />
+        <Icon
+          as={FacebookLogo}
+          boxSize={"30px"}
+          color={"primary"}
+          weight="fill"
+        />
         <Text textStyle={"heading"}>Deepak Karki</Text>
-        <Icon as={InstagramLogo} boxSize={10} color={"primary"} weight="fill" />
+        <Icon
+          as={InstagramLogo}
+          boxSize={"30px"}
+          color={"primary"}
+          weight="fill"
+        />
       </HStack>
       <Text maxW={"912px"} textStyle={"body"} textAlign={"center"}>
         Thank you for considering me for your photography and videography needs.
