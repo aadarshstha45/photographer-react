@@ -59,7 +59,8 @@ function buildFormData(
     }
   } else if (parentKey) {
     // Handle single file (Blob) or simple data
-    const value = data instanceof Date ? data.toString() : data;
+    const value =
+      data instanceof Date ? data.toISOString().split("T")[0] : data;
 
     // If the value is a file, ensure it's treated as a single entry
     if (value instanceof Blob) {

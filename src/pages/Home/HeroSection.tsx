@@ -1,10 +1,22 @@
 import HomeBanner from "@/assets/banners/HomeBanner.png";
 import { navItems } from "@/components/data";
-import { Button, Flex, HStack, Icon, Link, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  HStack,
+  Icon,
+  Link,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { List } from "@phosphor-icons/react";
 import { IconButton } from "@/components/Button";
+import AppointmentForm from "./AppointmentForm";
+
 const HeroSection = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       as={"section"}
@@ -40,6 +52,7 @@ const HeroSection = () => {
           height={"60px"}
           p={"18px 28px"}
           textTransform={"uppercase"}
+          onClick={onOpen}
         >
           Book an Appointment
         </Button>
@@ -79,6 +92,9 @@ const HeroSection = () => {
           </Text>
         </Flex>
       </Flex>
+
+      {/* AppointForm */}
+      <AppointmentForm isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };

@@ -2,6 +2,7 @@ import { Light } from "@/assets/icons";
 import { Button } from "@/components/Button";
 import TextInput from "@/components/Form/TextInput";
 import Header from "@/components/Header";
+import { useSendMessage } from "@/services/service-message";
 import { GridItem, Icon, SimpleGrid } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
@@ -21,9 +22,9 @@ const ContactSection = () => {
   };
 
   const { control, handleSubmit, reset } = useForm({ defaultValues });
-
+  const { mutateAsync: sendMessage, isPending: isSending } = useSendMessage();
   const onSubmit = async (data: any) => {
-    console.log(data);
+    await sendMessage({ data });
     reset();
   };
 
@@ -112,7 +113,12 @@ const ContactSection = () => {
             />
           </GridItem>
           <GridItem colSpan={2}>
-            <Button type="submit" w={"100%"} variant={"primary"}>
+            <Button
+              isLoading={isSending}
+              type="submit"
+              w={"100%"}
+              variant={"primary"}
+            >
               Submit
             </Button>
           </GridItem>

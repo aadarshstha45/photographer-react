@@ -19,6 +19,31 @@ const MyPhotographSection = () => {
     autoplaySpeed: 3000,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 0,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+        },
+      },
+    ],
   };
   return (
     <Box as={"section"} id={"#my-photographs"} mb={8}>
@@ -49,6 +74,7 @@ const MyPhotographSection = () => {
               bgPos={"center"}
               key={index}
               pos={"relative"}
+              overflow={"hidden"}
             >
               {/* Dark Overlay for non-center slides */}
               <Box

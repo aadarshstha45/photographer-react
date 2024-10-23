@@ -4,15 +4,11 @@ interface IPagination {
 }
 
 export const Api = {
-  Auth: {
-    login: "/login",
-    me: "/user",
-    forgot: "/forgot-password",
-    reset: "/reset-password",
+  Message: {
+    create: "/message",
   },
-  User: {
-    create: "/register",
-    getList: "/users-list",
+  Booking: {
+    create: "/booking",
   },
   Category: {
     create: "/category",

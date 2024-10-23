@@ -5,6 +5,8 @@ import "@fontsource/poppins";
 import { ColorStyle } from "./ColorStyle";
 import Switch from "./components/Switch";
 import { TextStyles } from "./components/Text";
+import { scrollbar } from "./components/Scrollbar";
+import { reactDatepickerStyles } from "./components/DatePicker";
 
 export const config: ThemeConfig = {
   initialColorMode: "dark", // Set initial mode to dark
@@ -22,29 +24,8 @@ export const theme = extendTheme({
         lineHeight: "normal",
       },
       /* Scrollbar styles */
-      "::-webkit-scrollbar": {
-        width: "8px",
-        height: "6px",
-      },
-      "::-webkit-scrollbar-track": {
-        backgroundColor:
-          props.colorMode === "dark"
-            ? ColorStyle.gray["600"]
-            : ColorStyle.gray["300"],
-      },
-      "::-webkit-scrollbar-thumb": {
-        backgroundColor:
-          props.colorMode === "dark"
-            ? ColorStyle.gray["200"]
-            : ColorStyle.gray["700"],
-        borderRadius: "2px",
-      },
-      "::-webkit-scrollbar-thumb:hover": {
-        backgroundColor:
-          props.colorMode === "dark"
-            ? ColorStyle.primary["700"]
-            : ColorStyle.primary["300"],
-      },
+      ...scrollbar(props),
+      ...reactDatepickerStyles(props),
     }),
   },
   textStyles: TextStyles,
