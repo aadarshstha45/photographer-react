@@ -50,7 +50,7 @@ const DatePicker: FC<DatePickerProps & InputProps> = ({
         const CustomInput = forwardRef<any, any>((props, ref) => {
           return (
             <InputGroup>
-              <Input {...inputElementProps} {...props} ref={ref} />
+              <Input {...inputElementProps} {...props} readOnly ref={ref} />
               <InputRightElement
                 userSelect="none"
                 pointerEvents="none"
@@ -76,11 +76,14 @@ const DatePicker: FC<DatePickerProps & InputProps> = ({
             <ReactDatePicker
               customInput={<CustomInput width={"100%"} />}
               selected={value ? new Date(value) : null}
+              dateFormat={"yyyy-MM-dd"}
               value={value}
               onChange={(value) => {
                 onChange(value);
                 backendError = undefined;
               }}
+              autoFocus={false}
+              popperPlacement="bottom-end"
               includeDates={includeDates}
               peekNextMonth
               showMonthDropdown

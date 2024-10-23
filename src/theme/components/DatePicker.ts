@@ -21,6 +21,7 @@ export const reactDatepickerStyles = (props: StyleFunctionProps) => ({
     color: "var(--font-color) !important",
     border: "1px solid var(--border-color) !important",
     boxShadow: "var(--box-shadow) !important",
+    zIndex: "999999999999999999 !important",
   },
   ".react-datepicker__triangle": {
     display: "none !important",
@@ -31,11 +32,16 @@ export const reactDatepickerStyles = (props: StyleFunctionProps) => ({
     borderBottom: "1px solid var(--border-color) !important",
     padding: "10px !important",
   },
-  ".react-datepicker-wrapper, .react-datepicker-popper": {
-    zIndex: "99999999 !important",
+  ".react-datepicker-wrapper": {
     width: "100% !important",
   },
-
+  ".react-datepicker-popper": {
+    width: "100% !important",
+    mt: "10px !important",
+  },
+  ".react-datepicker__month-container": {
+    position: "relative !important",
+  },
   ".react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name":
     {
       color: "var(--font-color) !important",

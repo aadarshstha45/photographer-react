@@ -21,3 +21,7 @@
 .slick-slide:not(.slick-center) .overlay {
   opacity: 0.7; /* Dark overlay applied to non-center slides */
 }
+
+.custom-popper {
+  z-index: 999999999999999999 !important;
+}

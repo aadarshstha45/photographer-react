@@ -4,11 +4,18 @@ interface IPagination {
 }
 
 export const Api = {
+  Auth: {
+    login: "/auth/login",
+    register: "/auth/register",
+  },
   Message: {
     create: "/message",
   },
   Booking: {
     create: "/booking",
+  },
+  Availability: {
+    get: "/availability",
   },
   Category: {
     create: "/category",
@@ -20,6 +27,6 @@ export const Api = {
     getOne: `/category/:id`,
     update: "/category/:id",
     delete: "/category/:id",
-    getList: "/category/get-list",
+    getList: "/category",
   },
 };

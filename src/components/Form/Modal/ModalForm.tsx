@@ -58,10 +58,10 @@ const ModalForm: React.FC<IModalForm> = ({
       >
         <ModalCloseButton />
 
-        <ModalHeader bg={headerBg} fontWeight={"bold"}>
+        <ModalHeader bg={headerBg} fontWeight={500}>
           {heading}
         </ModalHeader>
-        {isFetching && !!id ? (
+        {isFetching || !!id ? (
           <Flex justify={"center"} align={"center"} h={"50vh"}>
             <Spinner
               size={"xl"}
@@ -76,7 +76,8 @@ const ModalForm: React.FC<IModalForm> = ({
             id={formId}
             onSubmit={onSubmit}
             maxH={window.innerHeight - 200}
-            overflow={"auto"}
+            overflowY={"auto"}
+            overflowX={"hidden"}
           >
             {children}
           </ModalBody>
