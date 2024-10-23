@@ -12,6 +12,10 @@ const Messages = () => {
 
   const pageFromUrl = Number(urlParams.get("page")) || 1;
 
+  useEffect(() => {
+    setPageIndex(pageFromUrl);
+  }, [pageFromUrl]);
+
   const [pageIndex, setPageIndex] = useState(1);
   const [pageSize, _] = useState(10);
   const [searchText, setSearchText] = useState<string>("");
@@ -105,7 +109,10 @@ const Messages = () => {
     },
   ];
 
-  const { data: message, isPending: isLoading } = useFetchMessages();
+  const { data: message, isPending: isLoading } = useFetchMessages({
+    page: pageFromUrl,
+    perPage: pageSize,
+  });
   return (
     <Flex flexDir={"column"} gap={4}>
       <DataTable

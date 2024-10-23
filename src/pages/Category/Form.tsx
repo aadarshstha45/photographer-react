@@ -44,13 +44,13 @@ const CategoryForm = () => {
   const { control, handleSubmit, reset, formState } = useForm({
     defaultValues,
   });
-
   const { data: category, isFetching: isFetchingData } = useFetchSingleCategory(
     parseInt(id!)
   );
   const [prevImages, setPrevImages] = useState<{ id: number; url: string }[]>(
     []
   );
+  const [removeImage, setRemoveImage] = useState<boolean>(false);
   const [deleteImages, setDeleteImages] = useState<string[]>([]);
   const [backendError, setBackendError] = useState<Record<string, string[]>>(
     {}
@@ -90,9 +90,15 @@ const CategoryForm = () => {
       ? toFormData<any>(useGetDirtyData(formState, data))
       : toFormData<any>(data); // For add, send full data
     if (id) {
+      if (deleteImages.length > 0) {
+        formData.append("deleted_images", JSON.stringify(deleteImages));
+      }
+      if (removeImage) {
+        formData.append("remove_image", removeImage);
+      }
       const response = await updateCategory({
         id,
-        data: { ...formData, deleteImages },
+        data: formData,
       });
       if (response.data.status) {
         reset(defaultValues);
@@ -140,13 +146,14 @@ const CategoryForm = () => {
           label={"Image"}
           options={{
             accept: { "image/png": [] },
-            maxSize: 2,
           }}
           boxWidth={"250px"}
           boxHeight={"250px"}
           file={id ? category?.data?.image : ""}
           isRequired
+          noMaxSize
           backendError={backendError.image}
+          setRemoveImage={setRemoveImage}
         />
         <ReactDropzone
           isMultiple
@@ -155,8 +162,8 @@ const CategoryForm = () => {
           label={"Images"}
           options={{
             accept: { "image/png": [] },
-            maxSize: 2,
           }}
+          noMaxSize
           prevFiles={prevImages}
           setPrevFiles={setPrevImages}
           setDeleteImages={setDeleteImages}

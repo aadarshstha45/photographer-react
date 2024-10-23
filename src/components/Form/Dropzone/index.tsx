@@ -36,6 +36,7 @@ type DropzoneProps = {
   name: string;
   prevFiles?: IPrevFiles[];
   setPrevFiles?: Dispatch<SetStateAction<IPrevFiles[]>>;
+  setRemoveImage?: Dispatch<SetStateAction<boolean>>;
   control?: Control<any>;
   label?: string;
   setDeleteImages?: Dispatch<SetStateAction<string[]>>;
@@ -51,6 +52,7 @@ type DropzoneProps = {
   boxHeight?: ResponsiveValue<string | number>;
   height?: ResponsiveValue<string | number>;
   marginX?: ResponsiveValue<string | number>;
+  noMaxSize?: boolean;
   options: {
     accept?: Accept;
     maxSize?: number;
@@ -70,6 +72,8 @@ function ReactDropzone({
   prevFiles,
   setPrevFiles,
   setDeleteImages,
+  setRemoveImage,
+  noMaxSize,
   backendError,
   width,
   padding,
@@ -184,6 +188,8 @@ function ReactDropzone({
                 maxSize={
                   maxSize
                     ? convert(maxSize, "MB").to("bytes")
+                    : noMaxSize
+                    ? undefined
                     : convert(3, "MB").to("bytes")
                 }
                 accept={accept ?? { "*/*": [".*"] }}
@@ -238,6 +244,7 @@ function ReactDropzone({
                         onDelete={() => {
                           setPreview([]); // Clear the preview
                           setAcceptedFileList([]); // Clear the accepted files list
+                          setRemoveImage && setRemoveImage(true); // Clear the remove image
                         }}
                       />
                     )}

@@ -20,12 +20,21 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Check, DotsThreeOutline, Trash, X } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Bookings = () => {
   const [pageSize, _] = useState(10);
   const [pageIndex, setPageIndex] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+
+  const pageFromUrl = Number(urlParams.get("page")) || 1;
+
+  useEffect(() => {
+    setPageIndex(pageFromUrl);
+  }, [pageFromUrl]);
 
   const [id, setId] = useState<number | null>(null);
   const { mutateAsync: deleteBooking, isPending: isDeleting } =
@@ -166,7 +175,7 @@ const Bookings = () => {
   ];
 
   const { data: bookings, isPending: isLoading } = useFetchBookings({
-    page: pageIndex,
+    page: pageFromUrl,
     perPage: pageSize,
   });
 
