@@ -1,3 +1,5 @@
+import { Row } from "@tanstack/react-table";
+
 interface IPagination {
   current_page: number;
   per_page: number;
@@ -7,6 +9,14 @@ interface IPagination {
   last_page_url: string;
   next_page_url: string;
   prev_page_url: string;
+}
+
+export interface PaginationProps {
+  page: number;
+  perPage: number;
+}
+export interface IRow<T> {
+  row: Row<T>;
 }
 
 export interface IStatus {
@@ -59,4 +69,27 @@ export interface PhotographerResponse {
   facebook: string;
   instagram: string;
   youtube: string;
+}
+
+export interface MessageResponse {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  message: string;
+  messaged_at: string;
+}
+
+export interface BookingResponse {
+  id: number;
+  availability_id?: any;
+  ticket_number: string;
+  name: string;
+  phone: string;
+  address: string;
+  message: string;
+  status: string;
+  booked_at: string;
+  date?: any;
 }

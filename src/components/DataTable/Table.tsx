@@ -51,8 +51,7 @@ interface IDataTable {
     globalFilter: string;
     setGlobalFilter: Dispatch<SetStateAction<string>>;
   };
-  searchText?: string;
-  setSearchText?: Dispatch<SetStateAction<string>>;
+
   handlePageSize?: (pageSize: number) => void;
 }
 

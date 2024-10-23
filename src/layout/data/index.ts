@@ -1,5 +1,11 @@
 import { Authorities } from "@/services/service-auth";
-import { Chat, House, SquaresFour, User } from "@phosphor-icons/react";
+import {
+  CalendarBlank,
+  Chat,
+  House,
+  SquaresFour,
+  User,
+} from "@phosphor-icons/react";
 
 export const sidebarItems = [
   {
@@ -25,6 +31,12 @@ export const sidebarItems = [
     title: "Message",
     icon: Chat,
     to: "/messages",
+    accessor: [Authorities.superadmin, Authorities.admin],
+  },
+  {
+    title: "Bookings",
+    icon: CalendarBlank,
+    to: "/bookings",
     accessor: [Authorities.superadmin, Authorities.admin],
   },
 ];

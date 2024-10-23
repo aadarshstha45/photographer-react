@@ -19,6 +19,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Plus } from "@phosphor-icons/react";
+import { CategoryResponse, IRow } from "@/services/service-interface";
 
 const Category = () => {
   const location = useLocation();
@@ -61,7 +62,7 @@ const Category = () => {
     {
       header: "Name",
       accessorKey: "name",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<CategoryResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
             {row.original.name}{" "}
@@ -72,7 +73,7 @@ const Category = () => {
     {
       header: "Description",
       accessorKey: "description",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<CategoryResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
             {row.original.description}{" "}
@@ -84,7 +85,7 @@ const Category = () => {
     {
       header: "Image",
       accessorKey: "image",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<CategoryResponse>) => {
         return (
           <Stack align={"center"}>
             <Image objectFit={"cover"} src={row.original.image} boxSize={10} />
@@ -112,7 +113,7 @@ const Category = () => {
     {
       header: "Actions",
       accessorKey: "actions",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<CategoryResponse>) => {
         return (
           <HStack>
             <ActionColumn

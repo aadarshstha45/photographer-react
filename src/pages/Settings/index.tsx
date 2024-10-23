@@ -7,7 +7,7 @@ import {
   useUpdatePhotographer,
 } from "@/services/service-photographer";
 import Loader from "@/utils/Loader";
-import { Flex, GridItem, SimpleGrid } from "@chakra-ui/react";
+import { Flex, GridItem, HStack, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -149,9 +149,15 @@ const Settings = () => {
       {flag === "view" && <Button onClick={() => setFlag("edit")}>Edit</Button>}
 
       {flag === "edit" && (
-        <Button isLoading={isUpdating} type="submit" form="profile-form">
-          Save Changes
-        </Button>
+        <HStack gap={2}>
+          {" "}
+          <Button isLoading={isUpdating} type="submit" form="profile-form">
+            Save Changes
+          </Button>
+          <Button onClick={() => setFlag("view")} variant={"outline"}>
+            Cancel
+          </Button>
+        </HStack>
       )}
     </Flex>
   );

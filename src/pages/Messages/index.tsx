@@ -1,9 +1,10 @@
 import { ActionColumn, DataTable } from "@/components/DataTable";
-import { SearchInput } from "@/components/Form";
-import { Button, Flex, HStack, Icon, Text } from "@chakra-ui/react";
-import { Plus } from "@phosphor-icons/react";
+import { DeleteAlert, SearchInput } from "@/components/Form";
+import { IRow, MessageResponse } from "@/services/service-interface";
+import { useDeleteMessage, useFetchMessages } from "@/services/service-message";
+import { Flex, HStack, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Messages = () => {
   const location = useLocation();
@@ -14,6 +15,10 @@ const Messages = () => {
   const [pageIndex, setPageIndex] = useState(1);
   const [pageSize, _] = useState(10);
   const [searchText, setSearchText] = useState<string>("");
+  const [id, setId] = useState<number | null>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { mutateAsync: deleteMessage, isPending: isDeleting } =
+    useDeleteMessage();
   useEffect(() => {
     setPageIndex(pageFromUrl);
   }, [pageFromUrl]);
@@ -21,7 +26,7 @@ const Messages = () => {
     {
       header: "S.N",
       accessorKey: "sn",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
         return <Text> {pageSize * (pageIndex - 1) + (row.index + 1)} </Text>;
       },
       enableSorting: false,
@@ -29,7 +34,7 @@ const Messages = () => {
     {
       header: "Name",
       accessorKey: "name",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
             {row.original.name}
@@ -40,7 +45,7 @@ const Messages = () => {
     {
       header: "Email",
       accessorKey: "email",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
         return <Text textTransform={"capitalize"}>{row.original.email}</Text>;
       },
       enableSorting: false,
@@ -48,7 +53,7 @@ const Messages = () => {
     {
       header: "Address",
       accessorKey: "address",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
             {row.original.address}
@@ -60,7 +65,7 @@ const Messages = () => {
     {
       header: "Message",
       accessorKey: "message",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
             {row.original.message}
@@ -72,7 +77,7 @@ const Messages = () => {
     {
       header: "Phone",
       accessorKey: "phone",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
             {row.original.phone}
@@ -84,44 +89,47 @@ const Messages = () => {
     {
       header: "Actions",
       accessorKey: "actions",
-      cell: ({ row }: any) => {
+      cell: ({ row }: IRow<MessageResponse>) => {
+        const { id } = row.original;
         return (
           <HStack>
             <ActionColumn
-              handleEdit={() => {
-                console.log({ row });
+              handleDelete={() => {
+                setId(id);
+                onOpen();
               }}
-              handleDelete={() => {}}
             />
           </HStack>
         );
       },
     },
   ];
+
+  const { data: message, isPending: isLoading } = useFetchMessages();
   return (
     <Flex flexDir={"column"} gap={4}>
       <DataTable
         columns={columns}
-        data={[]}
-        // isLoading={isLoading}
-        // count={category?.data.count ?? 0}
+        data={message?.data?.rows ?? []}
+        isLoading={isLoading}
+        count={message?.data.count ?? 0}
         filter={{
           globalFilter: searchText,
           setGlobalFilter: setSearchText,
         }}
-        // pagination={
-        //   category?.data.count ?? 0 > 0
-        //     ? {
-        //         manual: true,
-        //         pageCount: category?.data?.pagination?.last_page,
-        //         totalRows: category?.data?.pagination?.total,
-        //         pageParams: {
-        //           pageIndex,
-        //           pageSize,
-        //         },
-        //       }
-        //     : undefined
-        // }
+        pagination={
+          message?.data.count ?? 0 > 0
+            ? {
+                manual: true,
+                pageCount: message?.data?.pagination?.last_page,
+                totalRows: message?.data?.pagination?.total,
+                pageParams: {
+                  pageIndex,
+                  pageSize,
+                },
+              }
+            : undefined
+        }
       >
         <Flex justify={"space-between"} align={"center"}>
           <SearchInput
@@ -129,16 +137,23 @@ const Messages = () => {
             maxW={"300px"}
             onSearch={setSearchText}
           />
-          <Button
-            as={Link}
-            to={"/category/add"}
-            leftIcon={<Icon as={Plus} boxSize={5} />}
-            size={"lg"}
-          >
-            Add
-          </Button>
         </Flex>
       </DataTable>
+      <DeleteAlert
+        isOpen={isOpen}
+        onClose={() => {
+          onClose();
+          setId(null);
+        }}
+        onDelete={async () => {
+          await deleteMessage({ id });
+          onClose();
+          setId(null);
+        }}
+        heading="Delete Message?"
+        message="Are you sure you want to delete this message?"
+        isDeleting={isDeleting}
+      />
     </Flex>
   );
 };

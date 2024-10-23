@@ -1,7 +1,6 @@
 import { ActionColumn, DataTable, StatusSwitch } from "@/components/DataTable";
-import { UserResponse } from "@/services/service-interface";
+import { IRow, UserResponse } from "@/services/service-interface";
 import { HStack, useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { Row } from "@tanstack/react-table";
 import UserForm from "./Form";
 import { useFetchUsers } from "@/services/service-user";
 import { Button } from "@/components/Button";
@@ -13,7 +12,7 @@ const Users = () => {
     {
       header: "S.No",
       accessorKey: "sn",
-      cell: ({ row }: { row: Row<UserResponse> }) => {
+      cell: ({ row }: IRow<UserResponse>) => {
         return row.index + 1;
       },
       enableSorting: false,
@@ -30,7 +29,7 @@ const Users = () => {
     {
       header: "Status",
       accessorKey: "status",
-      cell: ({ row }: { row: Row<UserResponse> }) => {
+      cell: ({ row }: IRow<UserResponse>) => {
         const { is_active, id } = row.original;
         return <StatusSwitch id={id} isActive={is_active} model="user" />;
       },
@@ -39,7 +38,7 @@ const Users = () => {
     {
       header: "Action",
       accessorKey: "action",
-      cell: ({ row }: { row: Row<UserResponse> }) => {
+      cell: ({ row }: IRow<UserResponse>) => {
         const { id } = row.original;
         return (
           <ActionColumn

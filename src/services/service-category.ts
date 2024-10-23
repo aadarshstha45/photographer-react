@@ -3,14 +3,10 @@ import { useFetch, useMutate } from "./service-form-methods";
 import {
   CategoryResponse,
   IStatus,
+  PaginationProps,
   RootResponse,
   SingleDataResponse,
 } from "./service-interface";
-
-interface IPagination {
-  page?: number;
-  perPage?: number;
-}
 
 interface ICategoryData {
   name?: string;
@@ -27,10 +23,10 @@ const useAddCategory = () => {
   });
 };
 
-const useFetchCategory = ({ page = 1, perPage = 10 }: IPagination) => {
+const useFetchCategory = ({ page = 1, perPage = 10 }: PaginationProps) => {
   return useFetch<RootResponse<CategoryResponse>>({
     apiEndpoint: Api.Category.get({ page, perPage }),
-    queryKey: ["category", page, perPage],
+    queryKey: ["categorys", page, perPage],
   });
 };
 
@@ -56,7 +52,7 @@ const useFetchTrashedCategory = () => {
 const useUpdateCategory = () => {
   return useMutate<ICategoryData>({
     apiEndpoint: Api.Category.update,
-    invalidateEndpoints: ["category", Api.Category.getOne],
+    invalidateEndpoints: ["categorys", Api.Category.getOne],
     message: "Category updated successfully",
     method: "POST",
   });
