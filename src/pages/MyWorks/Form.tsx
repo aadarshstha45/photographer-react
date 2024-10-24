@@ -1,5 +1,10 @@
 import { Button } from "@/components/Button";
-import { ReactDropzone, StatusRadio, TextInput } from "@/components/Form";
+import {
+  DatePicker,
+  ReactDropzone,
+  StatusRadio,
+  TextInput,
+} from "@/components/Form";
 import { useGetDirtyData, useGetErrors } from "@/hooks";
 import { toFormData } from "@/services/service-axios";
 import {
@@ -20,6 +25,7 @@ const WorkForm = () => {
     description: "",
     image: "",
     is_active: "1",
+    date: "",
     images: [],
   };
 
@@ -139,7 +145,7 @@ const WorkForm = () => {
           type="textarea"
           label={"Description"}
         />
-
+        <DatePicker isRequired control={control} name={"date"} label={"Date"} />
         <ReactDropzone
           name={"image"}
           control={control}

@@ -2,7 +2,7 @@ import { DataTable } from "@/components/DataTable";
 import ActionColumn from "@/components/DataTable/ActionColumn";
 import StatusSwitch from "@/components/DataTable/StatusSwitch";
 import { DeleteAlert, SearchInput } from "@/components/Form";
-import { CategoryResponse, IRow } from "@/services/service-interface";
+import { IRow, WorkResponse } from "@/services/service-interface";
 import { useDeleteWork, useFetchWork } from "@/services/service-work";
 import {
   Button,
@@ -15,6 +15,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Plus } from "@phosphor-icons/react";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -58,22 +59,22 @@ const Work = () => {
     {
       header: "Title",
       accessorKey: "title",
-      cell: ({ row }: IRow<CategoryResponse>) => {
+      cell: ({ row }: IRow<WorkResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
-            {row.original.title}{" "}
+            {row.original.title}
           </Text>
         );
       },
     },
     {
-      header: "Description",
-      accessorKey: "description",
+      header: "Date",
+      accessorKey: "date",
       maxSize: 500,
-      cell: ({ row }: IRow<CategoryResponse>) => {
+      cell: ({ row }: IRow<WorkResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
-            {row.original.description}{" "}
+            {moment(row.original.date).format("DD MMM YYYY")}
           </Text>
         );
       },
@@ -82,7 +83,7 @@ const Work = () => {
     {
       header: "Image",
       accessorKey: "image",
-      cell: ({ row }: IRow<CategoryResponse>) => {
+      cell: ({ row }: IRow<WorkResponse>) => {
         return (
           <Stack align={"center"}>
             <Image objectFit={"cover"} src={row.original.image} boxSize={10} />
@@ -106,7 +107,7 @@ const Work = () => {
     {
       header: "Actions",
       accessorKey: "actions",
-      cell: ({ row }: IRow<CategoryResponse>) => {
+      cell: ({ row }: IRow<WorkResponse>) => {
         return (
           <HStack>
             <ActionColumn

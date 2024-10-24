@@ -46,6 +46,11 @@ export interface UserResponse {
   is_active: boolean;
 }
 
+export interface Image {
+  id: number;
+  image: string;
+}
+
 export interface CategoryResponse {
   id: number;
   title?: string;
@@ -55,12 +60,18 @@ export interface CategoryResponse {
   is_active: number;
   image: string;
   icon: string;
-  images: {
-    id: number;
-    image: string;
-  }[];
+  images: Image[];
 }
 
+export interface WorkResponse {
+  id: number;
+  title: string;
+  description: string;
+  date?: any;
+  is_active: number;
+  images: Image[];
+  image: string;
+}
 export interface PhotographerResponse {
   id: number;
   name: string;

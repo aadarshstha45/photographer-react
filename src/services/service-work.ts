@@ -1,11 +1,11 @@
 import { Api } from "./service-api";
 import { useFetch, useMutate } from "./service-form-methods";
 import {
-  CategoryResponse,
   IStatus,
   PaginationProps,
   RootResponse,
   SingleDataResponse,
+  WorkResponse,
 } from "./service-interface";
 
 interface IWorkData {
@@ -24,27 +24,27 @@ const useAddWork = () => {
 };
 
 const useFetchWork = ({ page = 1, perPage = 10 }: PaginationProps) => {
-  return useFetch<RootResponse<CategoryResponse>>({
+  return useFetch<RootResponse<WorkResponse>>({
     apiEndpoint: Api.Work.get({ page, perPage }),
     queryKey: ["works", page, perPage],
   });
 };
 
 const useFetchWorkList = () => {
-  return useFetch<RootResponse<CategoryResponse>>({
+  return useFetch<RootResponse<WorkResponse>>({
     apiEndpoint: Api.Work.getList,
   });
 };
 
 const useFetchSingleWork = (id: number) => {
-  return useFetch<SingleDataResponse<CategoryResponse>>({
+  return useFetch<SingleDataResponse<WorkResponse>>({
     apiEndpoint: Api.Work.getOne.replace(":id", id + ""),
     queryKey: [Api.Work.getOne, id + ""],
     enabled: !!id,
   });
 };
 const useFetchTrashedWork = () => {
-  return useFetch<RootResponse<CategoryResponse>>({
+  return useFetch<RootResponse<WorkResponse>>({
     apiEndpoint: Api.Work.getTrashed,
   });
 };

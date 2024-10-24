@@ -1,3 +1,4 @@
+import DatePicker from "./Datepicker";
 import ReactDropzone from "./Dropzone";
 import ConfirmModal from "./Modal/ConfirmModal";
 import DeleteAlert from "./Modal/DeleteAlert";
@@ -7,6 +8,7 @@ import StatusRadio from "./StatusRadio";
 import TextInput from "./TextInput";
 export {
   ConfirmModal,
+  DatePicker,
   DeleteAlert,
   ModalForm,
   ReactDropzone,
