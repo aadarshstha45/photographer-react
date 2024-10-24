@@ -154,6 +154,7 @@ const DataTable: React.FC<IDataTable> = ({
                                 header.getSize() !== 150
                                   ? header.getSize()
                                   : "auto",
+
                               textAlign: "center",
                               padding: "20px",
                               fontWeight: 600,
@@ -240,11 +241,17 @@ const DataTable: React.FC<IDataTable> = ({
                             <Td
                               my={2}
                               style={{
-                                width: `${columns[index]?.size}%`,
+                                width: `${columns[index]?.maxSize}px`,
+                                maxWidth: `${
+                                  columns[index]?.maxSize
+                                    ? `${columns[index]?.maxSize}px`
+                                    : "auto"
+                                }`,
                                 textAlign: "center",
+                                overflow: "clip",
+                                textOverflow: "ellipsis",
                               }}
                               borderColor={borderColor}
-                              colSpan={1}
                               key={cell.id}
                             >
                               {flexRender(

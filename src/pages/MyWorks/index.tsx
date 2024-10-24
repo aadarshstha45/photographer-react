@@ -2,11 +2,8 @@ import { DataTable } from "@/components/DataTable";
 import ActionColumn from "@/components/DataTable/ActionColumn";
 import StatusSwitch from "@/components/DataTable/StatusSwitch";
 import { DeleteAlert, SearchInput } from "@/components/Form";
-import {
-  useDeleteCategory,
-  useFetchCategory,
-} from "@/services/service-category";
 import { CategoryResponse, IRow } from "@/services/service-interface";
+import { useDeleteWork, useFetchWork } from "@/services/service-work";
 import {
   Button,
   Flex,
@@ -21,7 +18,7 @@ import { Plus } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const Category = () => {
+const Work = () => {
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
 
@@ -34,7 +31,7 @@ const Category = () => {
     setPageIndex(pageFromUrl);
   }, [pageFromUrl]);
 
-  const { data: category, isPending: isLoading } = useFetchCategory({
+  const { data: work, isPending: isLoading } = useFetchWork({
     page: pageFromUrl,
     perPage: pageSize,
   });
@@ -43,8 +40,7 @@ const Category = () => {
   const [searchText, setSearchText] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { mutateAsync: deleteCategory, isPending: isDeleting } =
-    useDeleteCategory();
+  const { mutateAsync: deleteWork, isPending: isDeleting } = useDeleteWork();
   const handleOpen = (id: number) => {
     setId(id);
     onOpen();
@@ -103,11 +99,7 @@ const Category = () => {
       cell: ({ row }: any) => {
         const { is_active, id } = row.original;
         return (
-          <StatusSwitch
-            id={id as string}
-            isActive={is_active}
-            model="category"
-          />
+          <StatusSwitch id={id as string} isActive={is_active} model="work" />
         );
       },
     },
@@ -118,7 +110,7 @@ const Category = () => {
         return (
           <HStack>
             <ActionColumn
-              handleEdit={() => navigate(`/category/edit/${row.original.id}`)}
+              handleEdit={() => navigate(`/work/edit/${row.original.id}`)}
               handleDelete={() => handleOpen(row.original.id)}
             />
           </HStack>
@@ -129,7 +121,7 @@ const Category = () => {
 
   const handleDelete = async () => {
     if (id) {
-      await deleteCategory({ id });
+      await deleteWork({ id });
       onClose();
       setId(null);
     }
@@ -139,19 +131,19 @@ const Category = () => {
     <Flex flexDir={"column"} gap={4}>
       <DataTable
         columns={columns}
-        data={category?.data.rows ?? []}
+        data={work?.data.rows ?? []}
         isLoading={isLoading}
-        count={category?.data.count ?? 0}
+        count={work?.data.count ?? 0}
         filter={{
           globalFilter: searchText,
           setGlobalFilter: setSearchText,
         }}
         pagination={
-          category?.data.count ?? 0 > 0
+          work?.data.count ?? 0 > 0
             ? {
                 manual: true,
-                pageCount: category?.data?.pagination?.last_page,
-                totalRows: category?.data?.pagination?.total,
+                pageCount: work?.data?.pagination?.last_page,
+                totalRows: work?.data?.pagination?.total,
                 pageParams: {
                   pageIndex,
                   pageSize,
@@ -162,13 +154,13 @@ const Category = () => {
       >
         <Flex justify={"space-between"} align={"center"}>
           <SearchInput
-            placeholder="Search Category"
+            placeholder="Search Work"
             maxW={"300px"}
             onSearch={setSearchText}
           />
           <Button
             as={Link}
-            to={"/category/add"}
+            to={"/work/add"}
             leftIcon={<Icon as={Plus} boxSize={5} />}
             size={"lg"}
           >
@@ -184,12 +176,12 @@ const Category = () => {
           setId(null);
         }}
         onDelete={handleDelete}
-        heading="Delete Category"
+        heading="Delete Work"
         isDeleting={isDeleting}
-        message="Are you sure you want to delete this category?"
+        message="Are you sure you want to delete this work?"
       />
     </Flex>
   );
 };
 
-export default Category;
+export default Work;

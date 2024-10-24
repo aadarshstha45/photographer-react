@@ -1,11 +1,11 @@
-import { ActionColumn, DataTable, StatusSwitch } from "@/components/DataTable";
-import { IRow, UserResponse } from "@/services/service-interface";
-import { HStack, useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import UserForm from "./Form";
-import { useFetchUsers } from "@/services/service-user";
 import { Button } from "@/components/Button";
-import { useEffect, useState } from "react";
+import { ActionColumn, DataTable, StatusSwitch } from "@/components/DataTable";
 import { SearchInput } from "@/components/Form";
+import { IRow, UserResponse } from "@/services/service-interface";
+import { useFetchUsers } from "@/services/service-user";
+import { HStack, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import UserForm from "./Form";
 
 const Users = () => {
   const columns = [
@@ -85,10 +85,10 @@ const Users = () => {
         }}
         isLoading={isPending}
       >
-        <HStack spacing={4} bg={bg} p={4} borderRadius={5}>
+        <HStack justify={"space-between"} align={"center"} gap={4}>
           <SearchInput
             placeholder="Search Users"
-            maxW={"250px"}
+            maxW={"300px"}
             onSearch={setSearchText}
           />
           <Button size={"lg"} onClick={openForm}>

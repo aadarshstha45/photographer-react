@@ -26,6 +26,18 @@ export const Api = {
     delete: "/category/:id",
     getList: "/category/get-list",
   },
+  Work: {
+    create: "/work",
+    get: ({ page, perPage }: IPagination) => {
+      return `/work?page=${page}&per_page=${perPage}`;
+    },
+    getTrashed: "/work/trash",
+    restore: "/work/:id/restore",
+    getOne: `/work/:id`,
+    update: "/work/:id",
+    delete: "/work/:id",
+    getList: "/work/get-list",
+  },
   Photographer: {
     get: "/photographer/1",
     update: "/photographer/1",
@@ -36,6 +48,11 @@ export const Api = {
     },
     getOne: "/message/:id",
     delete: "/message/:id",
+  },
+  Availability: {
+    get: "/availability",
+    create: "/availability",
+    delete: "/availability/:id",
   },
   Booking: {
     get: ({ page, perPage }: IPagination) => {

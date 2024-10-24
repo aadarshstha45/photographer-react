@@ -3,10 +3,10 @@ import { ReactDropzone, StatusRadio, TextInput } from "@/components/Form";
 import { useGetDirtyData, useGetErrors } from "@/hooks";
 import { toFormData } from "@/services/service-axios";
 import {
-  useAddCategory,
-  useFetchSingleCategory,
-  useUpdateCategory,
-} from "@/services/service-category";
+  useAddWork,
+  useFetchSingleWork,
+  useUpdateWork,
+} from "@/services/service-work";
 import Loader from "@/utils/Loader";
 import { Flex, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -14,38 +14,37 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-const CategoryForm = () => {
+const WorkForm = () => {
   const defaultValues = {
     name: "",
     description: "",
     image: "",
     is_active: "1",
-    icon: "",
     images: [],
   };
 
   const { id } = useParams();
 
   const {
-    mutateAsync: addCategory,
+    mutateAsync: addWork,
     isPending: isAdding,
     isError: isAddingError,
     error: addError,
-  } = useAddCategory();
+  } = useAddWork();
 
   const {
-    mutateAsync: updateCategory,
+    mutateAsync: updateWork,
     isPending: isUpdating,
     isError: isUpdatingError,
     error: updateError,
-  } = useUpdateCategory();
+  } = useUpdateWork();
 
   const navigate = useNavigate();
 
   const { control, handleSubmit, reset, formState } = useForm({
     defaultValues,
   });
-  const { data: category, isFetching: isFetchingData } = useFetchSingleCategory(
+  const { data: work, isFetching: isFetchingData } = useFetchSingleWork(
     parseInt(id!)
   );
   const [prevImages, setPrevImages] = useState<{ id: number; url: string }[]>(
@@ -68,15 +67,14 @@ const CategoryForm = () => {
   useEffect(() => {
     if (id) {
       reset({
-        name: category?.data?.name,
-        description: category?.data?.description,
-        image: category?.data?.image,
-        icon: category?.data?.icon,
-        is_active: category?.data?.is_active ? "1" : "0",
+        name: work?.data?.name,
+        description: work?.data?.description,
+        image: work?.data?.image,
+        is_active: work?.data?.is_active ? "1" : "0",
       });
-      if (category?.data?.images.length ?? 0 > 0) {
+      if (work?.data?.images.length ?? 0 > 0) {
         setPrevImages(
-          category?.data?.images?.map((item) => ({
+          work?.data?.images?.map((item) => ({
             id: item.id,
             url: item.image,
           })) || []
@@ -85,7 +83,7 @@ const CategoryForm = () => {
     } else {
       reset(defaultValues);
     }
-  }, [id, reset, category?.data]);
+  }, [id, reset, work?.data]);
 
   const onSubmit = async (data: any) => {
     const formData = id
@@ -98,19 +96,19 @@ const CategoryForm = () => {
       if (removeImage) {
         formData.append("remove_image", removeImage);
       }
-      const response = await updateCategory({
+      const response = await updateWork({
         id,
         data: formData,
       });
       if (response.data.status) {
         reset(defaultValues);
-        navigate("/category");
+        navigate("/work");
       }
     } else {
-      const response = await addCategory({ data: formData });
+      const response = await addWork({ data: formData });
       if (response.data.status) {
         reset(defaultValues);
-        navigate("/category");
+        navigate("/work");
       }
     }
   };
@@ -120,7 +118,7 @@ const CategoryForm = () => {
   ) : (
     <Flex flexDir={"column"} gap={4}>
       <Text fontWeight={600} fontSize={"2xl"}>
-        {id ? "Edit" : "Add"} Category
+        {id ? "Edit" : "Add"} Work
       </Text>
       <Flex
         gap={4}
@@ -141,12 +139,7 @@ const CategoryForm = () => {
           type="textarea"
           label={"Description"}
         />
-        <TextInput
-          control={control}
-          name={"icon"}
-          label={"Icon"}
-          helperText="Please provide svg icon"
-        />
+
         <ReactDropzone
           name={"image"}
           control={control}
@@ -156,7 +149,7 @@ const CategoryForm = () => {
           }}
           boxWidth={"250px"}
           boxHeight={"250px"}
-          file={id ? category?.data?.image : ""}
+          file={id ? work?.data?.image : ""}
           isRequired
           noMaxSize
           backendError={backendError.image}
@@ -195,4 +188,4 @@ const CategoryForm = () => {
   );
 };
 
-export default CategoryForm;
+export default WorkForm;

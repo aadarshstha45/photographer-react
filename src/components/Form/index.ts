@@ -1,14 +1,16 @@
 import ReactDropzone from "./Dropzone";
+import ConfirmModal from "./Modal/ConfirmModal";
 import DeleteAlert from "./Modal/DeleteAlert";
 import ModalForm from "./Modal/ModalForm";
 import SearchInput from "./SearchInput";
-import StatusRadio from "./StausRadio";
+import StatusRadio from "./StatusRadio";
 import TextInput from "./TextInput";
 export {
-  TextInput,
-  SearchInput,
-  StatusRadio,
+  ConfirmModal,
+  DeleteAlert,
   ModalForm,
   ReactDropzone,
-  DeleteAlert,
+  SearchInput,
+  StatusRadio,
+  TextInput,
 };

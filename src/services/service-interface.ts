@@ -53,6 +53,7 @@ export interface CategoryResponse {
   description: string;
   is_active: number;
   image: string;
+  icon: string;
   images: {
     id: number;
     image: string;
@@ -92,4 +93,9 @@ export interface BookingResponse {
   status: string;
   booked_at: string;
   date?: any;
+}
+
+export interface AvailabilityResponse {
+  id: number;
+  date: string;
 }

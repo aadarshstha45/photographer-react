@@ -11,6 +11,9 @@ const CategoryForm = lazy(() => import("@/pages/Category/Form"));
 const Settings = lazy(() => import("@/pages/Settings"));
 const Messages = lazy(() => import("@/pages/Messages"));
 const Bookings = lazy(() => import("@/pages/Bookings"));
+const Availability = lazy(() => import("@/pages/Availability"));
+const MyWorks = lazy(() => import("@/pages/MyWorks"));
+const WorkForm = lazy(() => import("@/pages/MyWorks/Form"));
 export const ROUTES = {
   Login,
   Dashboard,
@@ -23,4 +26,7 @@ export const ROUTES = {
   Settings,
   Messages,
   Bookings,
+  Availability,
+  MyWorks,
+  WorkForm,
 };

@@ -1,7 +1,7 @@
-import { ROUTES } from "./routes";
 import LayoutWrapper from "@/layout";
 import { Authorities } from "@/services/service-auth";
 import { Center } from "@chakra-ui/react";
+import { ROUTES } from "./routes";
 
 const appRoutes = [
   {
@@ -34,6 +34,21 @@ const appRoutes = [
         accessor: [Authorities.admin, Authorities.superadmin],
       },
       {
+        path: "my-works",
+        element: <ROUTES.MyWorks />,
+        accessor: [Authorities.admin, Authorities.superadmin],
+      },
+      {
+        path: "my-works/add",
+        element: <ROUTES.WorkForm />,
+        accessor: [Authorities.admin, Authorities.superadmin],
+      },
+      {
+        path: "my-works/edit/:id",
+        element: <ROUTES.WorkForm />,
+        accessor: [Authorities.admin, Authorities.superadmin],
+      },
+      {
         path: "settings",
         element: <ROUTES.Settings />,
         accessor: [Authorities.superadmin],
@@ -46,6 +61,11 @@ const appRoutes = [
       {
         path: "bookings",
         element: <ROUTES.Bookings />,
+        accessor: [Authorities.admin, Authorities.superadmin],
+      },
+      {
+        path: "availability",
+        element: <ROUTES.Availability />,
         accessor: [Authorities.admin, Authorities.superadmin],
       },
       {
