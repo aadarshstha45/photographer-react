@@ -62,7 +62,7 @@ const useUpdateWorkStatus = () => {
   return useMutate<IStatus>({
     apiEndpoint: Api.Work.update,
     method: "POST",
-    invalidateEndpoints: ["work", Api.Work.getOne],
+    invalidateEndpoints: ["works", Api.Work.getOne],
     message: "Work updated successfully",
   });
 };
@@ -70,7 +70,7 @@ const useUpdateWorkStatus = () => {
 const useRestoreWork = () => {
   return useMutate({
     apiEndpoint: Api.Work.restore,
-    invalidateEndpoints: ["work", Api.Work.getTrashed],
+    invalidateEndpoints: ["works", Api.Work.getTrashed],
     message: "Work restored successfully",
   });
 };
@@ -79,7 +79,7 @@ const useDeleteWork = () => {
   return useMutate({
     method: "DELETE",
     apiEndpoint: Api.Work.delete,
-    invalidateEndpoints: ["work"],
+    invalidateEndpoints: ["works"],
     message: "Work deleted successfully",
   });
 };

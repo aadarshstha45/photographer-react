@@ -242,11 +242,7 @@ const DataTable: React.FC<IDataTable> = ({
                               my={2}
                               style={{
                                 width: `${columns[index]?.maxSize}px`,
-                                maxWidth: `${
-                                  columns[index]?.maxSize
-                                    ? `${columns[index]?.maxSize}px`
-                                    : "auto"
-                                }`,
+
                                 textAlign: "center",
                                 overflow: "clip",
                                 textOverflow: "ellipsis",

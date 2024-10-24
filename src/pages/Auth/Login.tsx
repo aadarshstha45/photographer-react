@@ -1,12 +1,12 @@
 import { Button } from "@/components/Button";
 import { TextInput } from "@/components/Form";
 import { useLogin } from "@/services/service-auth";
-import { Center, Flex, Link as CLink, Text, Stack } from "@chakra-ui/react";
+import { Center, Link as CLink, Flex, Stack, Text } from "@chakra-ui/react";
+import { AxiosError } from "axios";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useBoxProps } from "./boxProps";
-import { useEffect } from "react";
-import { AxiosError } from "axios";
 
 const Login = () => {
   const defaultValues = {
@@ -54,6 +54,7 @@ const Login = () => {
           control={control}
           name="password"
           label="Password"
+          type="password"
         />
         <Stack align={"end"}>
           <CLink

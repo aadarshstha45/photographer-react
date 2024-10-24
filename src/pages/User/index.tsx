@@ -3,7 +3,7 @@ import { ActionColumn, DataTable, StatusSwitch } from "@/components/DataTable";
 import { SearchInput } from "@/components/Form";
 import { IRow, UserResponse } from "@/services/service-interface";
 import { useFetchUsers } from "@/services/service-user";
-import { HStack, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { HStack, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import UserForm from "./Form";
 
@@ -59,7 +59,6 @@ const Users = () => {
     onClose: closeForm,
   } = useDisclosure();
 
-  const bg = useColorModeValue("gray.50", "gray.900");
   useEffect(() => {
     console.log({ searchText });
   }, [searchText]);

@@ -48,6 +48,7 @@ export interface UserResponse {
 
 export interface CategoryResponse {
   id: number;
+  title?: string;
   name: string;
   slug: string;
   description: string;

@@ -56,12 +56,12 @@ const Work = () => {
       enableSorting: false,
     },
     {
-      header: "Name",
-      accessorKey: "name",
+      header: "Title",
+      accessorKey: "title",
       cell: ({ row }: IRow<CategoryResponse>) => {
         return (
           <Text textTransform={"capitalize"} fontWeight={500}>
-            {row.original.name}{" "}
+            {row.original.title}{" "}
           </Text>
         );
       },
@@ -110,7 +110,7 @@ const Work = () => {
         return (
           <HStack>
             <ActionColumn
-              handleEdit={() => navigate(`/work/edit/${row.original.id}`)}
+              handleEdit={() => navigate(`/my-works/edit/${row.original.id}`)}
               handleDelete={() => handleOpen(row.original.id)}
             />
           </HStack>
@@ -160,7 +160,7 @@ const Work = () => {
           />
           <Button
             as={Link}
-            to={"/work/add"}
+            to={"/my-works/add"}
             leftIcon={<Icon as={Plus} boxSize={5} />}
             size={"lg"}
           >

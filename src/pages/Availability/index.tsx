@@ -34,10 +34,10 @@ const Availability = () => {
   } = useDisclosure();
   const [id, setId] = useState<string | null>(null);
   // State to hold the selected date information
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
   const eventColor = useColorModeValue("gray.200", "gray.900");
   const eventTextColor = useColorModeValue("gray.900", "gray.200");
-  const handleDateSelect = (selectInfo: DateSelectArg) => {
+  const handleDateSelect = (selectInfo: any) => {
     setSelectedDate(selectInfo); // Save selected date info
     onOpen(); // Open modal to confirm
   };

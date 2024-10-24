@@ -50,7 +50,6 @@ const MobileNav: React.FC<IMobileNav> = ({ isOpen, onClose }) => {
               <SidebarItem
                 key={index}
                 item={item}
-                subItems={item.subItems}
                 width={"250px"}
                 isOpen={openIndex === index}
                 onToggle={() => handleToggle(index)}

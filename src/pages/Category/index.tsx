@@ -73,11 +73,17 @@ const Category = () => {
     {
       header: "Description",
       accessorKey: "description",
-      maxSize: 500,
       cell: ({ row }: IRow<CategoryResponse>) => {
         return (
-          <Text textTransform={"capitalize"} fontWeight={500}>
-            {row.original.description}{" "}
+          <Text
+            wordBreak={"break-word"}
+            textOverflow={"ellipsis"}
+            noOfLines={2}
+            textTransform={"capitalize"}
+            fontWeight={500}
+            maxW={"300px"}
+          >
+            {row.original.description}
           </Text>
         );
       },

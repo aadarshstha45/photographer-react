@@ -16,7 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const WorkForm = () => {
   const defaultValues = {
-    name: "",
+    title: "",
     description: "",
     image: "",
     is_active: "1",
@@ -67,7 +67,7 @@ const WorkForm = () => {
   useEffect(() => {
     if (id) {
       reset({
-        name: work?.data?.name,
+        title: work?.data?.title,
         description: work?.data?.description,
         image: work?.data?.image,
         is_active: work?.data?.is_active ? "1" : "0",
@@ -102,13 +102,13 @@ const WorkForm = () => {
       });
       if (response.data.status) {
         reset(defaultValues);
-        navigate("/work");
+        navigate("/my-works");
       }
     } else {
       const response = await addWork({ data: formData });
       if (response.data.status) {
         reset(defaultValues);
-        navigate("/work");
+        navigate("/my-works");
       }
     }
   };
@@ -127,10 +127,10 @@ const WorkForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <TextInput
-          name={"name"}
+          name={"title"}
           control={control}
-          label={"Name"}
-          backendError={backendError.name}
+          label={"Title"}
+          backendError={backendError.title}
           isRequired
         />
         <TextInput
