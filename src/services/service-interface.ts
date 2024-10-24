@@ -38,3 +38,18 @@ export interface AvailabilityResponse {
   id: number;
   date: string;
 }
+
+export interface CategoryResponse {
+  id: number;
+  name: string;
+  slug: string;
+  image?: string;
+  icon?: string;
+  is_active: 1 | 0;
+  images?: Image[];
+}
+
+export interface Image {
+  id: number;
+  image: string;
+}

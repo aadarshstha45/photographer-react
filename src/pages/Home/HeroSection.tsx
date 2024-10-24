@@ -1,22 +1,11 @@
 import HomeBanner from "@/assets/banners/HomeBanner.png";
+import { Button, IconButton } from "@/components/Button";
 import { navItems } from "@/components/data";
-import {
-  Button,
-  Flex,
-  HStack,
-  Icon,
-  Link,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { Flex, HStack, Icon, Link, Text } from "@chakra-ui/react";
 import { List } from "@phosphor-icons/react";
-import { IconButton } from "@/components/Button";
-import AppointmentForm from "./AppointmentForm";
+import { NavLink } from "react-router-dom";
 
 const HeroSection = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Flex
       as={"section"}
@@ -42,20 +31,21 @@ const HeroSection = () => {
             {item.title}
           </Link>
         ))}
-        <Button
-          borderRadius={"50px"}
-          bg={"rgba(255, 255, 255, 0.30)"}
-          backdropFilter={"blur(10px)"}
-          _hover={{
-            bg: "rgba(255, 255, 255, 0.40)",
-          }}
-          height={"60px"}
-          p={"18px 28px"}
-          textTransform={"uppercase"}
-          onClick={onOpen}
-        >
-          Book an Appointment
-        </Button>
+        <NavLink to={"/book-an-appointment"}>
+          <Button
+            borderRadius={"50px"}
+            bg={"rgba(255, 255, 255, 0.30)"}
+            backdropFilter={"blur(10px)"}
+            _hover={{
+              bg: "rgba(255, 255, 255, 0.40)",
+            }}
+            height={"60px"}
+            p={"18px 28px"}
+            textTransform={"uppercase"}
+          >
+            Book an Appointment
+          </Button>
+        </NavLink>
       </HStack>
       <Flex justify={"center"} align={"center"} h={"100%"}>
         <Flex
@@ -94,7 +84,6 @@ const HeroSection = () => {
       </Flex>
 
       {/* AppointForm */}
-      <AppointmentForm isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };

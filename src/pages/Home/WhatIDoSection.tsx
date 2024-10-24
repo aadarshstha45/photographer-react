@@ -1,18 +1,11 @@
-import Header from "@/components/Header";
-import {
-  Flex,
-  Icon,
-  Image,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { whatIDo } from "./data";
 import Weeding from "@/assets/images/weeding.png";
+import Header from "@/components/Header";
+import { useFetchCategoryList } from "@/services/service-category";
+import SvgIcon from "@/utils/SvgIcon";
+import { Flex, Image, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 const WhatIDoSection = () => {
-  const fillColor = useColorModeValue("white", "black");
   const strokeColor = useColorModeValue("black", "");
-
+  const { data: categoryList } = useFetchCategoryList();
   return (
     <Flex
       as={"section"}
@@ -38,38 +31,30 @@ const WhatIDoSection = () => {
           body="A true fascination for photography and have been lucky enough to be working in the field for over a decade."
         />
         <Flex flexWrap={"wrap"} flexBasis={"33.33%"} gap={"70px"}>
-          {whatIDo.map((item, index) => (
+          {categoryList?.data?.rows.map((item, index) => (
             <Stack gap={2} key={index} align={"center"}>
-              <Icon
-                as={item.icon}
-                boxSize={"135px"}
-                fill={fillColor}
-                stroke={index !== 0 ? strokeColor : "none"}
-              />
+              <Flex
+                border={"2px dashed"}
+                borderRadius={"50%"}
+                align={"center"}
+                p={4}
+                justify={"center"}
+                boxSize={"120px"}
+              >
+                <SvgIcon
+                  svgString={item.icon ?? ""} // SVG string from the data
+                  boxSize={"80px"}
+                  fill={"black"}
+                  stroke={strokeColor}
+                />
+              </Flex>
               <Text
                 textTransform={"uppercase"}
                 fontSize={{ base: "19px", md: "23px" }}
                 fontFamily={"Bayon"}
                 color={index === 0 ? "primary" : ""}
               >
-                {item.title}
-              </Text>
-            </Stack>
-          ))}
-          {whatIDo.map((item, index) => (
-            <Stack gap={2} key={index} align={"center"}>
-              <Icon
-                as={item.icon}
-                boxSize={"135px"}
-                fill={fillColor}
-                stroke={index !== 0 ? strokeColor : "none"}
-              />
-              <Text
-                textTransform={"uppercase"}
-                fontSize={{ base: "19px", md: "23px" }}
-                fontFamily={"Bayon"}
-              >
-                {item.title}
+                {item.name}
               </Text>
             </Stack>
           ))}

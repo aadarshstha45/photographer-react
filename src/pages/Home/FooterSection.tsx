@@ -1,8 +1,10 @@
+import { useStoreInitData } from "@/store";
 import {
   Flex,
   GridItem,
   HStack,
   Icon,
+  Link,
   SimpleGrid,
   Stack,
   Text,
@@ -15,29 +17,31 @@ import {
   Phone,
 } from "@phosphor-icons/react";
 
-const contactInfo = {
-  location: "Banasthali, Kathmandu",
-  phone: "+977 9814236125",
-  email: "deepakkarki@gmail.com",
-};
-
 // Define icon mapping
 const iconMapping = {
-  location: MapPin,
+  address: MapPin,
   phone: Phone,
   email: Envelope,
 };
 
-const contactItems = Object.keys(contactInfo).map((key) => {
-  const typedKey = key as keyof typeof contactInfo;
-  return {
-    title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter
-    value: contactInfo[typedKey],
-    icon: iconMapping[typedKey],
-  };
-});
-
 const FooterSection = () => {
+  const { initData } = useStoreInitData();
+  console.log({ initData });
+
+  const contactInfo = {
+    address: initData?.address,
+    email: initData?.email,
+    phone: initData?.phone,
+  };
+
+  const contactItems = Object.keys(contactInfo).map((key) => {
+    const typedKey = key as keyof typeof contactInfo;
+    return {
+      title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter
+      value: contactInfo[typedKey],
+      icon: iconMapping[typedKey],
+    };
+  });
   return (
     <Flex flexDir={"column"} gap={16} py={10} maxW={"95vw"} mx={"auto"}>
       <SimpleGrid
@@ -73,19 +77,23 @@ const FooterSection = () => {
         ))}
       </SimpleGrid>
       <HStack align={"center"} justify={"center"} spacing={4}>
-        <Icon
-          as={FacebookLogo}
-          boxSize={"30px"}
-          color={"primary"}
-          weight="fill"
-        />
-        <Text textStyle={"heading"}>Deepak Karki</Text>
-        <Icon
-          as={InstagramLogo}
-          boxSize={"30px"}
-          color={"primary"}
-          weight="fill"
-        />
+        <Link href={initData?.facebook} isExternal>
+          <Icon
+            as={FacebookLogo}
+            boxSize={"30px"}
+            color={"primary"}
+            weight="fill"
+          />
+        </Link>
+        <Text textStyle={"heading"}>{initData?.name}</Text>
+        <Link href={initData?.instagram} isExternal>
+          <Icon
+            as={InstagramLogo}
+            boxSize={"30px"}
+            color={"primary"}
+            weight="fill"
+          />
+        </Link>
       </HStack>
       <Text maxW={"912px"} textStyle={"body"} textAlign={"center"}>
         Thank you for considering me for your photography and videography needs.

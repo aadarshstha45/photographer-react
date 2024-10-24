@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { Api } from "./service-api";
 import { ApiClient } from "./service-axios";
 import TokenService from "./service-token";
-import { useStoreInitData } from "@/store";
 
 export const authTokenKey = "authTokenKey";
 export const authTokenDetails = "authTokenDetails";
@@ -108,12 +107,4 @@ const useAuthentication = () => {
   });
 };
 
-const getRole = () => {
-  const { initData } = useStoreInitData();
-  return {
-    isAdmin: initData?.role.includes(Authorities.superadmin),
-    isUser: initData?.role.includes(Authorities.admin),
-  };
-};
-
-export { checkAuthentication, useAuthentication, useLogin, useLogout, getRole };
+export { checkAuthentication, useAuthentication, useLogin, useLogout };

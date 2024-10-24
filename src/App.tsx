@@ -1,6 +1,8 @@
+import { Center } from "@chakra-ui/react";
 import { ReactNode, Suspense } from "react";
 import { Route, RouteObject, Routes } from "react-router-dom";
 import { appRoutes } from "./router";
+import { useFetchPhotographer } from "./services/service-photographer";
 import Loader from "./utils/Loader";
 
 // Define the shape of your route objects for better type safety
@@ -32,6 +34,16 @@ const renderRoutes = (
 };
 
 const App = () => {
+  // Fetching initial data in the app
+  const { isLoading: isInitDataLoading, isError: isInitDataError } =
+    useFetchPhotographer();
+  if (isInitDataLoading && !isInitDataError) {
+    return (
+      <Center h={"100dvh"} w={"100dvw"}>
+        <Loader />
+      </Center>
+    );
+  }
   return (
     <Suspense fallback={<Loader />}>
       <Routes>

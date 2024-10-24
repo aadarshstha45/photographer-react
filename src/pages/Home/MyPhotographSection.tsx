@@ -1,10 +1,11 @@
 import Tripod from "@/assets/images/tripod.png";
-import Header from "@/components/Header";
-import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
-import { myPhotographs } from "./data";
-import Slider from "react-slick";
-import { NextArrow, PrevArrow } from "@/components/Slider/Arrows";
 import { Button } from "@/components/Button";
+import Header from "@/components/Header";
+import { NextArrow, PrevArrow } from "@/components/Slider/Arrows";
+import { useFetchCategoryList } from "@/services/service-category";
+import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
 
 const MyPhotographSection = () => {
   const settings = {
@@ -24,7 +25,7 @@ const MyPhotographSection = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
@@ -45,6 +46,9 @@ const MyPhotographSection = () => {
       },
     ],
   };
+
+  const { data: myPhotographs } = useFetchCategoryList();
+
   return (
     <Box as={"section"} id={"#my-photographs"} mb={8}>
       <Flex
@@ -66,11 +70,13 @@ const MyPhotographSection = () => {
       </Flex>
       <Box mt={10} mx={"auto"} className="slider-container" maxW={"90vw"}>
         <Slider {...settings}>
-          {myPhotographs.map((photo, index) => (
+          {myPhotographs?.data?.rows.map((item, index) => (
             <Flex
-              bg={`url(${photo.url})`}
+              bg={`url(${item.image})`}
               h={"535px"}
+              aspectRatio={9 / 16}
               bgSize={"cover"}
+              bgRepeat={"no-repeat"}
               bgPos={"center"}
               key={index}
               pos={"relative"}
@@ -98,7 +104,7 @@ const MyPhotographSection = () => {
               >
                 <Box bg={"primary"} h={10} w={1} />
                 <Text fontSize={"40px"} textStyle={"heading"} color={"white"}>
-                  {photo.title}
+                  {item.name}
                 </Text>
               </HStack>
             </Flex>
@@ -106,9 +112,11 @@ const MyPhotographSection = () => {
         </Slider>
       </Box>
       <HStack justify={"center"} mt={10} spacing={2}>
-        <Button w={"265px"} variant={"primary"}>
-          View More
-        </Button>
+        <Link to="/my-photographs">
+          <Button w={"265px"} variant={"primary"}>
+            View More
+          </Button>
+        </Link>
       </HStack>
     </Box>
   );

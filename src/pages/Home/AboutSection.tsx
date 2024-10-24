@@ -1,8 +1,10 @@
 import CameraImage from "@/assets/images/camera.png";
 import Header from "@/components/Header";
+import { useStoreInitData } from "@/store";
 import { GridItem, Image, SimpleGrid } from "@chakra-ui/react";
 
 const AboutSection = () => {
+  const { initData } = useStoreInitData();
   return (
     <SimpleGrid
       as={"section"}
@@ -21,9 +23,9 @@ const AboutSection = () => {
       >
         <Header
           caption={"Let's Know About Me"}
-          heading="I'm Deepak karki, a professional photographer based in New York."
-          body="I'm capturing the best moments on film, while each time presenting a unique standpoint. Capturing your wonderful and beautiful moment of your life."
-          highlightText={["Deepak", "karki"]}
+          heading={`I'm ${initData?.name}, a professional photographer based in New York.`}
+          body={initData?.description ?? ""}
+          highlightText={[initData?.name ?? ""]}
         />
       </GridItem>
     </SimpleGrid>

@@ -87,7 +87,6 @@ const SelectInput = ({
       name={name}
       control={control}
       render={({ field: { value, onChange }, fieldState: { error } }) => {
-        console.log({ error });
         return (
           <FormControl
             label={label}

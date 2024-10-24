@@ -8,6 +8,9 @@ export const Api = {
     login: "/auth/login",
     register: "/auth/register",
   },
+  Photographer: {
+    get: "photographer",
+  },
   Message: {
     create: "/message",
   },
@@ -27,6 +30,6 @@ export const Api = {
     getOne: `/category/:id`,
     update: "/category/:id",
     delete: "/category/:id",
-    getList: "/category",
+    getList: "/get-category-list",
   },
 };

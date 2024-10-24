@@ -38,6 +38,7 @@ const Header: FC<IHeaderProps> = ({
       <Text
         as="span"
         key={index}
+        textTransform={"capitalize"}
         color={
           highlightText.some(
             (text) => part.toLowerCase() === text.toLowerCase()
@@ -61,7 +62,9 @@ const Header: FC<IHeaderProps> = ({
   return (
     <Flex flexDir={"column"} gap={4}>
       <HStack gap={"20px"} align={"center"}>
-        <Text textStyle={"caption"}>{caption}</Text>
+        <Text textTransform={"capitalize"} textStyle={"caption"}>
+          {caption}
+        </Text>
         <Divider w={"90px"} borderColor={"primary"} opacity={"1"} />
       </HStack>
       <Text textStyle={"heading"}>{renderHeading()}</Text>

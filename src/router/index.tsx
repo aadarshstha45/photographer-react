@@ -1,7 +1,6 @@
 import LayoutWrapper from "@/layouts";
-import { ROUTES } from "./routes";
 import { Center } from "@chakra-ui/react";
-import { Navigate } from "react-router-dom";
+import { ROUTES } from "./routes";
 
 export const appRoutes = [
   {
@@ -17,7 +16,20 @@ export const appRoutes = [
         // element: <ROUTES.About />,
         element: <Center h="100vh">About</Center>,
       },
+      {
+        path: "my-photographs",
+        element: <ROUTES.Photographs />,
+      },
+      {
+        path: "book-an-appointment",
+        element: <ROUTES.Appointment />,
+      },
+      {
+        path: "book-an-appointment/success",
+        element: <ROUTES.AppointmentSuccess />,
+      },
+      { path: "*", element: <Center h="85dvh">404 Not Found</Center> },
     ],
   },
-  { path: "*", element: <Navigate to="/" /> },
+  { path: "*", element: <Center h="100vh">404 Not Found</Center> },
 ];

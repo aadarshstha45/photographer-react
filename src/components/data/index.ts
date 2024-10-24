@@ -9,7 +9,7 @@ export const navItems = [
   },
   {
     title: "My Work",
-    to: "/my-work",
+    to: "/my-photographs",
   },
   {
     title: "Contact Me",

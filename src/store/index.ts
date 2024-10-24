@@ -1,10 +1,15 @@
 import { create } from "zustand";
 
-interface IInitData {
-  name?: string;
-  email?: string;
-  role: string;
-  is_active: number;
+export interface IInitData {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  description: string;
+  facebook: string;
+  instagram: string;
+  youtube: string;
 }
 
 interface IInitDataStore {
