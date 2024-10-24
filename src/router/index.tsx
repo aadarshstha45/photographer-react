@@ -17,8 +17,8 @@ export const appRoutes = [
         element: <Center h="100vh">About</Center>,
       },
       {
-        path: "my-photographs",
-        element: <ROUTES.Photographs />,
+        path: "services",
+        element: <ROUTES.Services />,
       },
       {
         path: "book-an-appointment",

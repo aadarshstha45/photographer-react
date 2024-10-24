@@ -64,8 +64,9 @@ const WhatIDoSection = () => {
         src={Weeding}
         alt={"Weeding"}
         pos={"absolute"}
-        right={-52}
+        right={-48}
         top={"15%"}
+        hideBelow={"1280px"}
         maxW={"447px"}
       />
     </Flex>

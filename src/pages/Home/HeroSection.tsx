@@ -27,7 +27,32 @@ const HeroSection = () => {
       />
       <HStack hideBelow={"md"} py={4} justify={"center"} gap={10}>
         {navItems.map((item, index) => (
-          <Link color={"white"} as={NavLink} to={item.to} key={index}>
+          <Link
+            as={NavLink}
+            to={item.to}
+            p={2}
+            pos={"relative"}
+            borderRadius={5}
+            color={"white"}
+            _after={{
+              content: '""',
+              position: "absolute",
+              bottom: "-1px",
+              left: "0",
+              width: "0",
+              height: "2px",
+              bgColor: "white",
+              zIndex: 10,
+              transition: "width 0.3s ease-in-out",
+            }}
+            _hover={{
+              textDecoration: "none",
+              _after: {
+                width: "100%",
+              },
+            }}
+            key={index}
+          >
             {item.title}
           </Link>
         ))}
@@ -64,7 +89,7 @@ const HeroSection = () => {
           <Text
             lineHeight={"normal"}
             textShadow={"0px 4px 4px rgba(0, 0, 0, 0.20)"}
-            textStyle={"heading"}
+            fontFamily={"Bebas Neue"}
             fontSize={{
               base: "50px",
               sm: "75px",
@@ -82,8 +107,6 @@ const HeroSection = () => {
           </Text>
         </Flex>
       </Flex>
-
-      {/* AppointForm */}
     </Flex>
   );
 };

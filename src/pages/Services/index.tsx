@@ -18,7 +18,6 @@ const Photographs = () => {
       >
         <Masonry gutter="20px">
           {photographs?.data?.rows.map((item, index) => {
-            console.log({ item });
             return (
               <Flex
                 overflow={"hidden"}
@@ -35,8 +34,6 @@ const Photographs = () => {
                     src={item.image ?? undefined}
                     borderRadius={5}
                     loading="lazy"
-                    h={300}
-                    aspectRatio={9 / 16}
                     fallback={
                       <Flex
                         bg={"gray.200"}

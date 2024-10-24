@@ -4,12 +4,12 @@ export const navItems = [
     to: "/",
   },
   {
-    title: "What I Do",
-    to: "/what-i-do",
+    title: "My Work",
+    to: "/my-work",
   },
   {
-    title: "My Work",
-    to: "/my-photographs",
+    title: "Services",
+    to: "/services",
   },
   {
     title: "Contact Me",

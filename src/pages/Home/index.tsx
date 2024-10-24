@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/react";
-import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
-import WhatIDoSection from "./WhatIDoSection";
-import MyPhotographSection from "./MyPhotographSection";
 import ContactSection from "./ContactSection";
-import FooterSection from "./FooterSection";
 import CopyrightSection from "./CopyrightSection";
+import FooterSection from "./FooterSection";
+import HeroSection from "./HeroSection";
+import MyPhotographSection from "./MyPhotographSection";
+import WhatIDoSection from "./WhatIDoSection";
 
 const Home = () => {
   return (

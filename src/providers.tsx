@@ -10,16 +10,13 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
-import { Slide, toast, ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { authTokenKey } from "./services/service-auth";
-import TokenService from "./services/service-token";
+import "slick-carousel/slick/slick.css";
 import { config, theme } from "./theme";
 const ErrorFallback = () => {
   return (
@@ -38,23 +35,7 @@ const queryClient = new QueryClient({
       staleTime: 30 * 1000,
     },
   },
-  queryCache: new QueryCache({
-    onError: async (error) => {
-      const isAuthenticated = TokenService.isAuthenticated();
-      const err = error as AxiosError;
-      if (
-        (err.request?.status === 401 || err.request?.status === 500) &&
-        !isAuthenticated
-      ) {
-        queryClient.setQueryData([authTokenKey], () => false);
-        setTimeout(() => {
-          TokenService.clearToken();
-          queryClient.clear();
-          toast.error("Session Expired! Please login again!");
-        }, 500);
-      }
-    },
-  }),
+  queryCache: new QueryCache(),
 });
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
