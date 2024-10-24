@@ -1,0 +1,1 @@
+import{h as o}from"./index-CPwLrq_G.js";const p=()=>{const r=o("gray.50","gray.900"),a=o("gray.200","gray.600");return{w:"full",gap:4,maxW:{sm:"500px"},bg:r,border:"1px solid",borderColor:a,p:{base:4,sm:8},boxShadow:"0px 1px 2px 0px rgba(16, 24, 40, 0.05)",borderRadius:5}};export{p as u};
